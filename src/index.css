@@ -2,5 +2,6 @@
 @import url('./vendor/fonts/fonts.css');
 
 :root {
-
+  --background-color: #202020;
+  --accent-color: #3DDC84;
 }
