@@ -2,6 +2,12 @@
 @import url('./vendor/fonts/fonts.css');
 
 :root {
-  --background-color: #202020;
+  --dark-background-color: #202020;
+  /* --light-background-color: #202020; */
   --accent-color: #3DDC84;
+  --attention-color: #EE3465;
+  --ui-accent-color: #4285F4;
+  --base-text-color: #fff;
+
+  --main-font: 'Inter', 'Arial', sans-serif;
 }
