@@ -2,12 +2,23 @@
 @import url('./vendor/fonts/fonts.css');
 
 :root {
-  --dark-background-color: #202020;
-  /* --light-background-color: #202020; */
-  --accent-color: #3DDC84;
-  --attention-color: #EE3465;
-  --ui-accent-color: #4285F4;
+  --dark-bg-color: #202020;
+  --accent-color: #3ddc84;
+  --attention-color: #ee3465;
+  --ui-accent-color: #4285f4;
   --base-text-color: #fff;
 
   --main-font: 'Inter', 'Arial', sans-serif;
+}
+
+#root {
+  font-family: var(--main-font);
+  color: var(--base-text-color);
+  
+  background-color: var(--dark-bg-color);
+}
+
+* {
+  font-family: inherit;
+  color: inherit;
 }
