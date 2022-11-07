@@ -14,7 +14,7 @@
 }
 
 @media (min-width: 1280px) {
-  .about-project__paragraph {
+  .base-text {
     font-size: 14px;
     line-height: 1.43;
   }

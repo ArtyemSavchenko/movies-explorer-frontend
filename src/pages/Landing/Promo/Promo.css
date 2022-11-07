@@ -20,7 +20,7 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 1.26;
-  letter-spacing: -0.04em;
+  letter-spacing: -.04em;
   text-align: center;
 
   margin-top: 0;
@@ -55,7 +55,7 @@
   border-radius: 3px;
 
   transition-property: background-color, color;
-  transition-duration: .3s;
+  transition-duration: var(--out-duration);
   transition-timing-function: linear;
 }
 
@@ -63,7 +63,7 @@
   .promo__btn-more:hover {
     background-color: #fff;
     color: var(--dark-bg-color);
-    transition-duration: .15s;
+    transition-duration: var(--in-duration);
   }
 }
 

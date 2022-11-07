@@ -9,12 +9,17 @@
   --base-text-color: #fff;
 
   --main-font: 'Inter', 'Arial', sans-serif;
+
+  --in-duration: .1s;
+  --out-duration: .2s;
+
+  scroll-behavior: smooth;
 }
 
 #root {
   font-family: var(--main-font);
   color: var(--base-text-color);
-  
+
   background-color: var(--dark-bg-color);
 }
 

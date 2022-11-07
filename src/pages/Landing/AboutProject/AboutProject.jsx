@@ -5,7 +5,7 @@ import BaseText from '../BaseText/BaseText';
 
 const AboutProject = () => {
   return (
-    <section className="about-project">
+    <section className="about-project" id="about-project">
       <HeadingUnderlined>О проекте</HeadingUnderlined>
       <div className="about-project__text-content-box">
         <div className="about-project__text-box">
