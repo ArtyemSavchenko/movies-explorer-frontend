@@ -25,12 +25,7 @@
   max-width: 319px;
 }
 
-.about-project__paragraph {
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 1.45;
-
-  margin: 0;
+.about-project .base-text {
   max-width: 319px;
 }
 
@@ -95,11 +90,6 @@
     margin-bottom: 22px;
   }
 
-  .about-project__paragraph {
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
   .about-project__time-line {
     row-gap: 14px;
   }
@@ -130,10 +120,7 @@
     max-width: 550px;
   }
 
-  .about-project__paragraph {
-    font-size: 14px;
-    line-height: 1.43;
-
+  .about-project .base-text {
     max-width: 550px;
   }
 

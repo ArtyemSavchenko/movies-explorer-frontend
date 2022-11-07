@@ -1,6 +1,7 @@
 import './AboutProject.css';
 
 import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
+import BaseText from '../BaseText/BaseText';
 
 const AboutProject = () => {
   return (
@@ -11,19 +12,19 @@ const AboutProject = () => {
           <h3 className="about-project__subheading">
             Дипломный проект включал 5&nbsp;этапов
           </h3>
-          <p className="about-project__paragraph">
+          <BaseText>
             Составление плана, работу над бэкендом, вёрстку, добавление
             функциональности и&nbsp;финальные доработки.
-          </p>
+          </BaseText>
         </div>
         <div className="about-project__text-box">
           <h3 className="about-project__subheading">
             На&nbsp;выполнение диплома ушло 5&nbsp;недель
           </h3>
-          <p className="about-project__paragraph">
+          <BaseText>
             У&nbsp;каждого этапа был мягкий и&nbsp;жёсткий дедлайн, которые
             нужно было соблюдать, чтобы успешно защититься.
-          </p>
+          </BaseText>
         </div>
       </div>
       <div className="about-project__time-line">
