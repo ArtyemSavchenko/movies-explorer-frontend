@@ -1,6 +1,5 @@
 .techs {
   padding: 70px 18px;
-
   background-color: #272727;
 }
 
@@ -28,7 +27,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 84px);
   place-content: center;
-
   gap: 10px;
 }
 

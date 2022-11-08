@@ -7,6 +7,7 @@ const AboutProject = () => {
   return (
     <section className="about-project" id="about-project">
       <HeadingUnderlined>О проекте</HeadingUnderlined>
+
       <div className="about-project__text-content-box">
         <div className="about-project__text-box">
           <h3 className="about-project__subheading">
@@ -17,6 +18,7 @@ const AboutProject = () => {
             функциональности и&nbsp;финальные доработки.
           </BaseText>
         </div>
+
         <div className="about-project__text-box">
           <h3 className="about-project__subheading">
             На&nbsp;выполнение диплома ушло 5&nbsp;недель
@@ -27,6 +29,7 @@ const AboutProject = () => {
           </BaseText>
         </div>
       </div>
+
       <div className="about-project__time-line">
         <p className="about-project__duration about-project__duration_accent">
           1&nbsp;неделя

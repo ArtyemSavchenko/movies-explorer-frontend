@@ -4,6 +4,10 @@ import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
 import Tech from '../Tech/Tech';
 
+import { generateId } from '../../../utils/generateId';
+
+const TECHS = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'MongoDB'];
+
 const Techs = () => {
   return (
     <section className="techs">
@@ -13,14 +17,11 @@ const Techs = () => {
         На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые
         применили в&nbsp;дипломном проекте.
       </BaseText>
+
       <div className="techs__techs-box">
-        <Tech>HTML</Tech>
-        <Tech>CSS</Tech>
-        <Tech>JS</Tech>
-        <Tech>React</Tech>
-        <Tech>Git</Tech>
-        <Tech>Express.js</Tech>
-        <Tech>MongoDB</Tech>
+        {TECHS.map((tech) => (
+          <Tech key={generateId()}>{tech}</Tech>
+        ))}
       </div>
     </section>
   );
