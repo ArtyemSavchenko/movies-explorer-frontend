@@ -6,16 +6,16 @@ import PortfolioLink from '../PortfolioLink/PortfolioLink';
 
 const LINKS = [
   {
-    name: 'Статичный сайт',
-    link: 'https://github.com/ArtyemSavchenko/mrc-zdorovie',
-  },
-  {
-    name: 'Адаптивный сайт',
+    name: 'Боевой проект',
     link: 'https://github.com/ArtyemSavchenko/mrc-zdorovie',
   },
   {
     name: 'Одностраничное приложение',
-    link: 'https://github.com/ArtyemSavchenko/mrc-zdorovie',
+    link: 'https://github.com/ArtyemSavchenko/react-mesto-api-full',
+  },
+  {
+    name: 'Адаптивный сайт',
+    link: 'https://artyemsavchenko.github.io/russian-travel',
   },
 ];
 

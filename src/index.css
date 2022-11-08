@@ -13,8 +13,6 @@
   --in-duration: .1s;
   --out-duration: .2s;
 
-  --focus-effect: .5em 0 0 0 var(--accent-color) inset;
-
   scroll-behavior: smooth;
 }
 
