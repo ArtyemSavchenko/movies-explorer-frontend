@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 
 import './App.css';
+import Footer from './components/Footer/Footer';
 
 import Main from './components/Main/Main';
 
@@ -12,6 +13,7 @@ const App = () => {
       <Main>
         <RouterProvider router={router} />
       </Main>
+      <Footer />
     </div>
   );
 }
