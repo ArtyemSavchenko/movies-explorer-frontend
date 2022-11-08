@@ -13,6 +13,8 @@
   --in-duration: .1s;
   --out-duration: .2s;
 
+  --focus-effect: .5em 0 0 0 var(--accent-color) inset;
+
   scroll-behavior: smooth;
 }
 
@@ -26,4 +28,28 @@
 * {
   font-family: inherit;
   color: inherit;
+}
+
+.focus-effect {
+  outline: none;
+  position: relative;
+  z-index: 0;
+}
+
+.focus-effect::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: .33em;
+  position: absolute;
+  background-color: var(--ui-accent-color);
+  top: calc(50% + .25em);
+  left: -.2em;
+  z-index: -1;
+  transition: all var(--out-duration) linear;
+}
+
+.focus-effect:focus::before {
+  width: 2em;
+  transition: all var(--in-duration) linear;
 }

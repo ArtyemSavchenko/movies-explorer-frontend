@@ -22,7 +22,7 @@ const AboutMe = () => {
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </BaseText>
           <a
-            className="about-me__git-link"
+            className="about-me__git-link focus-effect"
             href="https://github.com/ArtyemSavchenko"
             target="_blank"
             rel="me noreferrer"
