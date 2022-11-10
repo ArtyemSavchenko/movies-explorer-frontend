@@ -49,23 +49,11 @@
 }
 
 .about-me__git-link {
-  text-decoration: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.21;
 
   align-self: start;
-
-  transition: color var(--out-duration) linear;
-  transition: box-shadow var(--out-duration) linear;
-}
-
-@media(any-hover: hover) {
-  .about-me__git-link:hover {
-    color: var(--ui-accent-color);
-
-    transition: color var(--in-duration) linear;
-  }
 }
 
 @media (min-width: 768px) {

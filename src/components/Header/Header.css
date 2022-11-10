@@ -1,0 +1,35 @@
+.header {
+  padding: 18px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_landing {
+  background-color: var(--promo-bg-color);
+}
+
+.header__logo {
+  outline: none;
+}
+
+.header__logo:focus > .header__logo-pic {
+  border-radius: 50%;
+  box-shadow:  0 0 0 2px var(--ui-accent-color), 0 0 0 3px #fff;
+}
+
+.header__logo_current-page {
+  cursor: default;
+}
+
+@media(min-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media(min-width: 1280px) {
+  .header {
+    padding: 18px 70px;
+  }
+}

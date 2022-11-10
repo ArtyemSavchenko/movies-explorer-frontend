@@ -1,3 +1,5 @@
+import CustomLink from '../CustomLink/CustomLink';
+
 import './Footer.css';
 
 const Footer = () => {
@@ -7,22 +9,20 @@ const Footer = () => {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__link-box">
-        <a
-          className="footer__link focus-effect"
+        <CustomLink
+          extraClass="footer__link focus-effect"
+          type="external-link"
           href="https://practicum.yandex.ru/"
-          target="_blank"
-          rel="noreferrer"
         >
           Яндекс.Практикум
-        </a>
-        <a
-          className="footer__link focus-effect"
+        </CustomLink>
+        <CustomLink
+          extraClass="footer__link focus-effect"
+          type="external-link"
           href="https://github.com/ArtyemSavchenko"
-          target="_blank"
-          rel="noreferrer me"
         >
           Github
-        </a>
+        </CustomLink>
         <p className="footer__year">© 2022</p>
       </div>
     </footer>

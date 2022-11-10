@@ -3,6 +3,7 @@
 
 :root {
   --dark-bg-color: #202020;
+  --promo-bg-color: #073042;
   --accent-color: #3ddc84;
   --attention-color: #ee3465;
   --ui-accent-color: #4285f4;
@@ -11,7 +12,7 @@
   --main-font: 'Inter', 'Arial', sans-serif;
 
   --in-duration: .1s;
-  --out-duration: .2s;
+  --out-duration: .25s;
 
   scroll-behavior: smooth;
 }
@@ -21,6 +22,8 @@
   color: var(--base-text-color);
 
   background-color: var(--dark-bg-color);
+
+  min-height: 100vh;
 }
 
 * {

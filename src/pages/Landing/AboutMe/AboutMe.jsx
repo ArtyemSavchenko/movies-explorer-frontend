@@ -2,6 +2,7 @@ import photo from '../../../images/about-me-photo.webp';
 
 import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
+import CustomLink from '../../../components/CustomLink/CustomLink';
 
 import './AboutMe.css';
 
@@ -21,14 +22,13 @@ const AboutMe = () => {
             планы очень быстро расти как разработчик. Я&nbsp;обязательно стану
             хокаге.
           </BaseText>
-          <a
-            className="about-me__git-link focus-effect"
+          <CustomLink
+            extraClass="about-me__git-link focus-effect"
+            type='external-link'
             href="https://github.com/ArtyemSavchenko"
-            target="_blank"
-            rel="me noreferrer"
           >
             Github
-          </a>
+          </CustomLink>
         </figcaption>
       </figure>
     </section>

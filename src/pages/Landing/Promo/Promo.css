@@ -6,7 +6,7 @@
   box-sizing: border-box;
   padding: 70px 10px 30px;
 
-  background-color: #073042;
+  background-color: var(--promo-bg-color);
 }
 
 .promo__img {
@@ -53,13 +53,14 @@
   margin-bottom: 30px;
   border: 1px solid rgba(255 255 255 / .6);
   border-radius: 3px;
+  outline-color: var(--ui-accent-color);
 
   transition-property: background-color, color;
   transition-duration: var(--out-duration);
   transition-timing-function: linear;
 }
 
-@media (hover: hover) {
+@media (any-hover: hover) {
   .promo__btn-more:hover {
     background-color: #fff;
     color: var(--dark-bg-color);

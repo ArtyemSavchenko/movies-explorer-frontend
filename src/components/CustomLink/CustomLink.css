@@ -1,0 +1,32 @@
+.custom-link {
+  padding: 0;
+  margin: 0;
+  border: none;
+
+  cursor: pointer;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: color var(--out-duration) linear;
+}
+
+.custom-link_type_accent {
+  color: var(--ui-accent-color);
+}
+
+.custom-link_type_attention {
+  color: var(--attention-color);
+}
+
+@media(any-hover: hover) {
+  .custom-link:hover {
+    color: var(--ui-accent-color);
+
+    transition: color var(--in-duration) linear;
+  }
+
+  .custom-link_type_accent:hover, .custom-link_type_attention:hover {
+    opacity: .9;
+  }
+}

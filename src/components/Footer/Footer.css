@@ -25,19 +25,9 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
-  text-decoration: none;
 
   display: block;
   padding: 6px 0;
-
-  transition: color var(--out-duration) linear;
-}
-
-@media(any-hover: hover) {
-  .footer__link:hover {
-    color: var(--ui-accent-color);
-    transition: color var(--out-duration) linear;
-  }
 }
 
 .footer__year {
