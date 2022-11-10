@@ -25,7 +25,7 @@
   max-width: 319px;
 }
 
-.about-project .base-text {
+.about-project__description {
   max-width: 319px;
 }
 
@@ -66,7 +66,7 @@
   margin: 0;
 }
 
-.about-project .heading-underlined {
+.about-project__heading {
   margin-bottom: 60px;
 }
 
@@ -75,7 +75,7 @@
     padding: 90px 50px;
   }
 
-  .about-project .heading-underlined {
+  .about-project__heading {
     margin-bottom: 70px;
   }
 
@@ -120,7 +120,7 @@
     max-width: 550px;
   }
 
-  .about-project .base-text {
+  .about-project__description {
     max-width: 550px;
   }
 

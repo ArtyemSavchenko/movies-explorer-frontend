@@ -1,6 +1,6 @@
-import './Promo.css';
-
 import promoImg from '../../../images/promo-logo.svg';
+
+import './Promo.css';
 
 const Promo = () => {
   return (

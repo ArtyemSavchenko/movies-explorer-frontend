@@ -1,19 +1,19 @@
-import './Techs.css';
-
 import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
 import Tech from '../Tech/Tech';
 
 import { generateId } from '../../../utils/generateId';
 
+import './Techs.css';
+
 const TECHS = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'MongoDB'];
 
 const Techs = () => {
   return (
     <section className="techs">
-      <HeadingUnderlined>Технологии</HeadingUnderlined>
+      <HeadingUnderlined extraClass='techs__heading'>Технологии</HeadingUnderlined>
       <h3 className="techs__subheading">7&nbsp;технологий</h3>
-      <BaseText>
+      <BaseText extraClass="techs__description">
         На&nbsp;курсе веб-разработки мы&nbsp;освоили технологии, которые
         применили в&nbsp;дипломном проекте.
       </BaseText>

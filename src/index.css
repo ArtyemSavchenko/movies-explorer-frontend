@@ -34,7 +34,7 @@
   z-index: 0;
 }
 
-.focus-effect::before {
+.focus-effect::after {
   content: '';
   display: block;
   width: 0;
@@ -47,7 +47,7 @@
   transition: all var(--out-duration) linear;
 }
 
-.focus-effect:focus::before {
+.focus-effect:focus::after {
   width: 2em;
   transition: all var(--in-duration) linear;
 }

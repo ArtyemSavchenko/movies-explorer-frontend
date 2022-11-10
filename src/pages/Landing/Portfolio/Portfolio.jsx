@@ -1,8 +1,8 @@
-import './Portfolio.css';
-
 import { generateId } from '../../../utils/generateId';
 
 import PortfolioLink from '../PortfolioLink/PortfolioLink';
+
+import './Portfolio.css';
 
 const LINKS = [
   {

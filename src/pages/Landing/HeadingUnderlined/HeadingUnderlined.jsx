@@ -1,8 +1,8 @@
 import './HeadingUnderlined.css';
 
-const HeadingUnderlined = ({ children }) => {
+const HeadingUnderlined = ({ children, extraClass = '' }) => {
   return (
-    <h2 className="heading-underlined">{children}</h2>
+    <h2 className={`heading-underlined ${extraClass}`}>{children}</h2>
   )
 };
 

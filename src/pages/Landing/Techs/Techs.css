@@ -3,7 +3,7 @@
   background-color: #272727;
 }
 
-.techs .heading-underlined {
+.techs__heading {
   margin-bottom: 60px;
 }
 
@@ -18,7 +18,7 @@
   margin-bottom: 24px;
 }
 
-.techs .base-text {
+.techs__description {
   text-align: center;
   margin-bottom: 50px;
 }
