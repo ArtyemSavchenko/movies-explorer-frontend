@@ -13,9 +13,16 @@ const NotFound = () => {
         <p className="not-found-page__err-number">404</p>
         <p className="not-found-page__err-text">Страница не найдена</p>
       </div>
-      <CustomLink extraClass='focus-effect' type='button' appearance='accent' onClick={() => navigate(-1)}>Назад</CustomLink>
+      <CustomLink
+        extraClass="not-found-page__link focus-effect"
+        type="button"
+        appearance="accent"
+        onClick={() => navigate(-1)}
+      >
+        Назад
+      </CustomLink>
     </section>
-  )
+  );
 };
 
 export default NotFound;

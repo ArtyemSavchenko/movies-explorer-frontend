@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import CustomLink from '../CustomLink/CustomLink';
 
 import Logo from '../Logo/Logo';
-import NavBar from '../NavBar/NavBar';
+import SignMenu from './SignMenu/SignMenu';
+import NavBar from './NavBar/NavBar';
 
 import './Header.css';
 
@@ -18,7 +18,7 @@ const Header = ({ isLoggedIn }) => {
     } else {
       setIsLanding(false);
     }
-  }, [location.pathname]);
+  }, [location]);
 
   const setLogoClass = ({ isActive }) =>
     isActive ? 'header__logo header__logo_current-page' : 'header__logo';
@@ -28,8 +28,7 @@ const Header = ({ isLoggedIn }) => {
       <NavLink className={setLogoClass} to="/">
         <Logo extraClass="header__logo-pic" />
       </NavLink>
-
-      <NavBar />
+      {isLoggedIn ? <NavBar /> : <SignMenu />}
     </header>
   );
 };
