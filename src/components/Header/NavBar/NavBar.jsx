@@ -7,9 +7,9 @@ import BtnClose from '../../BtnClose/BtnClose';
 import './NavBar.css';
 
 const NavBar = () => {
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
-  const setActiveLinkClass = ({ isActive }) => {
+  const setLinkClass = ({ isActive }) => {
     let className = 'nav-bar__link focus-effect';
     if (isActive) {
       className += ' nav-bar__link_active';
@@ -17,12 +17,12 @@ const NavBar = () => {
     return className;
   };
 
-  const setActiveButtonClass = ({ isActive }) =>
+  const setBtnClass = ({ isActive }) =>
     isActive ? 'nav-bar__btn nav-bar__btn_active' : 'nav-bar__btn';
 
   return (
     <div className="nav-bar">
-      <BurgerButton aria-label="Открыть меню" onClick={() => setIsOpened(true)} />
+      <BurgerButton extraClass="nav-bar__burger-btn" aria-label="Открыть меню" onClick={() => setIsOpened(true)} />
       <div
         className={`nav-bar__menu${isOpened ? ' nav-bar__menu_opened' : ''}`}
       >
@@ -34,27 +34,28 @@ const NavBar = () => {
         />
         <ul className="nav-bar__link-box">
           <li>
-            <NavLink className={setActiveLinkClass} to="/">
+            <NavLink className={setLinkClass} to="/">
               Главная
             </NavLink>
           </li>
           <li>
-            <NavLink className={setActiveLinkClass} to="/movies">
+            <NavLink className={setLinkClass} to="/movies">
               Фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink className={setActiveLinkClass} to="/saved-movies">
+            <NavLink className={setLinkClass} to="/saved-movies">
               Сохраненные фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink className={setActiveButtonClass} to="/profile">
+            <NavLink className={setBtnClass} to="/profile">
               Аккаунт
             </NavLink>
           </li>
         </ul>
       </div>
+
     </div>
   );
 };

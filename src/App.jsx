@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 import './App.css';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="app">

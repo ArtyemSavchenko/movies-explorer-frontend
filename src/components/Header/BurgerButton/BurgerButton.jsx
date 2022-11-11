@@ -1,8 +1,8 @@
 import './BurgerButton.css';
 
-const BurgerButton = ({ ...restProps }) => {
+const BurgerButton = ({ extraClass, ...restProps }) => {
   return (
-    <button className="burger-btn" type="button" {...restProps}>
+    <button className={`burger-btn ${extraClass}`} type="button" {...restProps}>
       <svg
         className="burger-btn__svg"
         viewBox="0 0 28 23"

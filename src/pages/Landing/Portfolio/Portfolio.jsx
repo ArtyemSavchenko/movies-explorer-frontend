@@ -15,7 +15,7 @@ const LINKS = [
   },
   {
     name: 'Адаптивный сайт',
-    link: 'https://artyemsavchenko.github.io/russian-travel',
+    link: 'https://github.com/ArtyemSavchenko/russian-travel',
   },
 ];
 
