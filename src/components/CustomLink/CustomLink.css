@@ -27,6 +27,6 @@
   }
 
   .custom-link_type_accent:hover, .custom-link_type_attention:hover {
-    opacity: .9;
+    opacity: .7;
   }
 }

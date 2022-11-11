@@ -23,6 +23,7 @@
 
 .about-me__photo {
   display: block;
+  max-width: 100%;
   width: 292px;
   aspect-ratio: 292/352;
   border-radius: 10px;
