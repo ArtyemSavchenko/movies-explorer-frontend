@@ -8,7 +8,7 @@ import NavBar from './NavBar/NavBar';
 import './Header.css';
 
 const Header = ({ isLoggedIn }) => {
-  const location = useLocation('/');
+  const location = useLocation();
 
   const [isLanding, setIsLanding] = useState(true);
 
@@ -25,7 +25,7 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <header className={`header${isLanding ? ' header_landing' : ''}`}>
-      <NavLink className={setLogoClass} to="/">
+      <NavLink className={setLogoClass} to="/" aria-label="Ссылка на главную страницу.">
         <Logo extraClass="header__logo-pic" />
       </NavLink>
       {isLoggedIn ? <NavBar /> : <SignMenu />}

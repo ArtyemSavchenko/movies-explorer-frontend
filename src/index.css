@@ -30,6 +30,7 @@
 * {
   font-family: inherit;
   color: inherit;
+  outline-color: var(--ui-accent-color);
 }
 
 .focus-effect {
