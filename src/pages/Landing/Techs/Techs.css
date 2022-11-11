@@ -35,6 +35,9 @@
   .techs {
     padding: 90px 50px;
   }
+  .techs__techs-box {
+    padding: 0;
+  }
 }
 
 @media(min-width: 1280px) {
@@ -44,6 +47,5 @@
 
   .techs__techs-box {
     grid-template-columns: repeat(auto-fit, 90px);
-    padding: 0;
   }
 }
