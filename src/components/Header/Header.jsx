@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 import SignMenu from './SignMenu/SignMenu';
 import NavBar from './NavBar/NavBar';
+import LogoLink from '../ui/LogoLink/LogoLink';
 
 import './Header.css';
-import LogoLink from '../LogoLink/LogoLink';
 
 const Header = ({ isLoggedIn }) => {
   const location = useLocation();

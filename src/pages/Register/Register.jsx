@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import LogoLink from '../../components/LogoLink/LogoLink';
+import LogoLink from '../../components/ui/LogoLink/LogoLink';
 import FormInput from '../../components/ui/FormInput/FormInput';
 import FormBtn from '../../components/ui/FormBtn/FormBtn';
 import CustomLink from '../../components/ui/CustomLink/CustomLink';
