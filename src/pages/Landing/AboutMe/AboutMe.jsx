@@ -24,7 +24,7 @@ const AboutMe = () => {
           </BaseText>
           <CustomLink
             extraClass="about-me__git-link"
-            type='external-link'
+            feature='external-link'
             href="https://github.com/ArtyemSavchenko"
           >
             Github

@@ -49,7 +49,7 @@ const Register = () => {
         <FormBtn extraClass="register__submit-btn">Зарегистрироваться</FormBtn>
         <p className="register__caption">
           Уже зарегистрированы?{' '}
-          <CustomLink type="internal-link" appearance="accent" extraClass="register__caption-link" to='/signin'>
+          <CustomLink feature="internal-link" appearance="accent" extraClass="register__caption-link" to='/signin'>
             Войти
           </CustomLink>
         </p>

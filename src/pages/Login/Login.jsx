@@ -45,7 +45,7 @@ const Login = () => {
         <FormBtn extraClass="login__submit-btn">Войти</FormBtn>
         <p className="login__caption">
           Ещё не зарегистрированы?{' '}
-          <CustomLink type="internal-link" appearance="accent" extraClass="login__caption-link" to='/signup'>
+          <CustomLink feature="internal-link" appearance="accent" extraClass="login__caption-link" to='/signup'>
             Регистрация
           </CustomLink>
         </p>

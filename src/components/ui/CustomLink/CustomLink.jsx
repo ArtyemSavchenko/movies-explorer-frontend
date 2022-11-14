@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 
 import './CustomLink.css';
 
-// type: button - <button>, internal-link - <Link>, external-link - <a>
+// feature: button - <button>, internal-link - <Link>, external-link - <a>
 // appearance: attention - red, accent - blue
 
 const CustomLink = ({
   children,
   extraClass,
-  type = 'internal-link',
+  feature = 'internal-link',
   appearance = 'default',
   ...restProps
 }) => {
@@ -29,11 +29,10 @@ const CustomLink = ({
     return resultClasses;
   };
 
-  if (type === 'button') {
+  if (feature === 'button') {
     return (
       <button
         className={`custom-link${addClassName()}`}
-        type="button"
         {...restProps}
       >
         {children}
@@ -41,7 +40,7 @@ const CustomLink = ({
     );
   }
 
-  if (type === 'internal-link') {
+  if (feature === 'internal-link') {
     return (
       <Link className={`custom-link${addClassName()} `} {...restProps}>
         {children}
@@ -49,7 +48,7 @@ const CustomLink = ({
     );
   }
 
-  if (type === 'external-link') {
+  if (feature === 'external-link') {
     return (
       <a
         className={`custom-link${addClassName()}`}

@@ -15,7 +15,7 @@ const NotFound = () => {
       </div>
       <CustomLink
         extraClass="not-found-page__link"
-        type="button"
+        feature="button"
         appearance="accent"
         onClick={() => navigate(-1)}
       >
