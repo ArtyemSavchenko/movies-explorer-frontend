@@ -2,7 +2,7 @@ import './PortfolioLink.css';
 
 const PortfolioLink = ({ children, href, ...restProps }) => {
   return (
-    <a className="portfolio-link focus-effect" href={href} {...restProps}>
+    <a className="portfolio-link" href={href} {...restProps}>
       {children}
       <svg className="portfolio-link__arrow"
         viewBox="0 0 11 11"

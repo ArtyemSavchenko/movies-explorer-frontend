@@ -14,7 +14,7 @@ const NotFound = () => {
         <p className="not-found-page__err-text">Страница не найдена</p>
       </div>
       <CustomLink
-        extraClass="not-found-page__link focus-effect"
+        extraClass="not-found-page__link"
         type="button"
         appearance="accent"
         onClick={() => navigate(-1)}

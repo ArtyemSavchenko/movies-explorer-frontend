@@ -23,7 +23,7 @@ const AboutMe = () => {
             хокаге.
           </BaseText>
           <CustomLink
-            extraClass="about-me__git-link focus-effect"
+            extraClass="about-me__git-link"
             type='external-link'
             href="https://github.com/ArtyemSavchenko"
           >

@@ -30,33 +30,6 @@
 * {
   font-family: inherit;
   color: inherit;
+  outline-offset: 5px;
+  outline-color: var(--ui-accent-color);
 }
-
-/* .focus-effect {
-  outline: none;
-  position: relative;
-  z-index: 0;
-}
-
-*:focus {
-  outline: var(--ui-accent-color) solid 3px;
-  outline-offset: 3px;
-} */
-
-/* .focus-effect::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: .33em;
-  position: absolute;
-  background-color: var(--ui-accent-color);
-  top: calc(50% + .25em);
-  left: -.2em;
-  z-index: -1;
-  transition: all var(--out-duration) linear;
-}
-
-.focus-effect:focus::after {
-  width: 2em;
-  transition: all var(--in-duration) linear;
-} */

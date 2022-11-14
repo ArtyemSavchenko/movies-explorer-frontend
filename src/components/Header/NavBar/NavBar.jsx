@@ -10,7 +10,7 @@ const NavBar = () => {
   const [isOpened, setIsOpened] = useState(false);
 
   const setLinkClass = ({ isActive }) => {
-    let className = 'nav-bar__link focus-effect';
+    let className = 'nav-bar__link';
     if (isActive) {
       className += ' nav-bar__link_active';
     }

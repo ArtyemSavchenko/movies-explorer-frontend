@@ -10,14 +10,14 @@ const Footer = () => {
       </p>
       <div className="footer__link-box">
         <CustomLink
-          extraClass="footer__link focus-effect"
+          extraClass="footer__link"
           type="external-link"
           href="https://practicum.yandex.ru/"
         >
           Яндекс.Практикум
         </CustomLink>
         <CustomLink
-          extraClass="footer__link focus-effect"
+          extraClass="footer__link"
           type="external-link"
           href="https://github.com/ArtyemSavchenko"
         >
