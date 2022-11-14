@@ -80,7 +80,7 @@
   width: 0;
   height: 2px;
   background-color: #fff;
-  transition: background-color var(--out-duration) linear;
+  transition: opacity var(--out-duration) linear;
 }
 
 .nav-bar__link_active {
@@ -89,7 +89,6 @@
 
 .nav-bar__link_active::before {
   width: 100%;
-  transition: background-color var(--in-duration) linear;
 }
 
 .nav-bar__btn {
@@ -103,18 +102,23 @@
   border-radius: 20px;
   background-color: #313131;
 
-  transition: background-color var(--out-duration) linear;
+  transition: opacity var(--out-duration) linear;
 }
 
 @media (any-hover: hover) {
   .nav-bar__link:hover {
-    color: var(--ui-accent-color);
-    transition: background-color var(--in-duration) linear;
+    opacity: .7;
+    transition: opacity var(--in-duration) linear;
   }
 
   .nav-bar__btn:hover {
-    background-color: var(--ui-accent-color);
-    transition: background-color var(--in-duration) linear;
+    opacity: .8;
+    transition: opacity var(--in-duration) linear;
+  }
+
+  .nav-bar__link_active:hover, .nav-bar__btn_active:hover {
+    opacity: 1;
+    cursor: default;
   }
 }
 

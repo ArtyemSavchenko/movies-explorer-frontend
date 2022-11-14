@@ -20,6 +20,10 @@ const NavBar = () => {
   const setBtnClass = ({ isActive }) =>
     isActive ? 'nav-bar__btn nav-bar__btn_active' : 'nav-bar__btn';
 
+  const closeMenu = () => {
+    setIsOpened(false);
+  }
+
   return (
     <div className="nav-bar">
       <BurgerButton extraClass="nav-bar__burger-btn" aria-label="Открыть меню" onClick={() => setIsOpened(true)} />
@@ -34,22 +38,22 @@ const NavBar = () => {
         />
         <ul className="nav-bar__link-box">
           <li>
-            <NavLink className={setLinkClass} to="/">
+            <NavLink className={setLinkClass} to="/" onClick={closeMenu}>
               Главная
             </NavLink>
           </li>
           <li>
-            <NavLink className={setLinkClass} to="/movies">
+            <NavLink className={setLinkClass} to="/movies" onClick={closeMenu}>
               Фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink className={setLinkClass} to="/saved-movies">
-              Сохраненные фильмы
+            <NavLink className={setLinkClass} to="/saved-movies" onClick={closeMenu}>
+              Сохраненные&nbsp;фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink className={setBtnClass} to="/profile">
+            <NavLink className={setBtnClass} to="/profile" onClick={closeMenu}>
               Аккаунт
             </NavLink>
           </li>
