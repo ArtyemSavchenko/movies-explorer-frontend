@@ -1,4 +1,4 @@
-import CustomLink from '../CustomLink/CustomLink';
+import CustomLink from '../ui/CustomLink/CustomLink';
 
 import './Footer.css';
 

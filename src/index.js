@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 
 import { router } from './routes/routes';
 
-import Preloader from './components/Preloader/Preloader';
+import Preloader from './components/ui/Preloader/Preloader';
 
 import './index.css';
 

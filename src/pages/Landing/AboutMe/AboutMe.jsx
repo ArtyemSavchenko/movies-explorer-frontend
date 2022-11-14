@@ -2,7 +2,7 @@ import photo from '../../../images/about-me-photo.webp';
 
 import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
-import CustomLink from '../../../components/CustomLink/CustomLink';
+import CustomLink from '../../../components/ui/CustomLink/CustomLink';
 
 import './AboutMe.css';
 

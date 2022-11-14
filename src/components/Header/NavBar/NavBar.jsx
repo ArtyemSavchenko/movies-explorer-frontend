@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import BurgerButton from '../BurgerButton/BurgerButton';
-import BtnClose from '../../BtnClose/BtnClose';
+import BtnClose from '../../ui/BtnClose/BtnClose';
 
 import './NavBar.css';
 

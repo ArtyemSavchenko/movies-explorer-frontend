@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import LogoLink from '../../components/LogoLink/LogoLink';
-import FormInput from '../../components/FormInput/FormInput';
-import FormBtn from '../../components/FormBtn/FormBtn';
-import CustomLink from '../../components/CustomLink/CustomLink';
+import FormInput from '../../components/ui/FormInput/FormInput';
+import FormBtn from '../../components/ui/FormBtn/FormBtn';
+import CustomLink from '../../components/ui/CustomLink/CustomLink';
 
 import './Login.css';
 
