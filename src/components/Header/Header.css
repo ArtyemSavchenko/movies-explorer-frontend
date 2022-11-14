@@ -9,20 +9,6 @@
   background-color: var(--promo-bg-color);
 }
 
-.header__logo {
-  outline-color: var(--ui-accent-color);
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* .header__logo:focus > .header__logo-pic {
-  border-radius: 50%;
-  box-shadow:  0 0 0 2px var(--ui-accent-color), 0 0 0 3px #fff;
-} */
-
-.header__logo_current-page {
-  cursor: default;
-}
-
 @media(min-width: 768px) {
   .header {
     padding: 18px 30px;

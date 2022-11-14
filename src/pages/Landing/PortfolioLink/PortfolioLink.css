@@ -30,7 +30,6 @@
 }
 
 .portfolio-link:focus > .portfolio-link__arrow {
-  fill: var(--ui-accent-color);
   transform: translate(-33%, 0) rotate(45deg) scale(1.5);
 }
 

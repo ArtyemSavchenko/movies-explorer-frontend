@@ -8,7 +8,7 @@
   background-color: transparent;
   -webkit-tap-highlight-color: transparent;
 
-  transition: color var(--out-duration) linear;
+  transition: opacity var(--out-duration) linear;
 }
 
 .custom-link_type_accent {
@@ -21,12 +21,8 @@
 
 @media(any-hover: hover) {
   .custom-link:hover {
-    color: var(--ui-accent-color);
-
-    transition: color var(--in-duration) linear;
-  }
-
-  .custom-link_type_accent:hover, .custom-link_type_attention:hover {
     opacity: .7;
+
+    transition: opacity var(--in-duration) linear;
   }
 }

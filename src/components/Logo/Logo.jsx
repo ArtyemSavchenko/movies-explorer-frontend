@@ -18,16 +18,18 @@ const COLORS = [
   'indianred',
 ];
 
-const Logo = ({ extraClass = '' }) => {
+const Logo = ({ extraClass = '', funny = false }) => {
   const [fill, setFill] = useState('');
 
   const getRandomColor = () => {
-    const count = COLORS.length;
-    const newColor = COLORS[Math.floor(Math.random() * count)];
-    if (fill !== newColor) {
-      setFill(newColor);
-    } else {
-      setFill('#3ddc84');
+    if (funny) {
+      const count = COLORS.length;
+      const newColor = COLORS[Math.floor(Math.random() * count)];
+      if (fill !== newColor) {
+        setFill(newColor);
+      } else {
+        setFill('#3ddc84');
+      }
     }
   };
 
@@ -47,4 +49,5 @@ const Logo = ({ extraClass = '' }) => {
     </svg>
   );
 };
+
 export default Logo;

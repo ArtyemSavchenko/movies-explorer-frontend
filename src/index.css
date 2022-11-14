@@ -30,16 +30,20 @@
 * {
   font-family: inherit;
   color: inherit;
-  outline-color: var(--ui-accent-color);
 }
 
-.focus-effect {
+/* .focus-effect {
   outline: none;
   position: relative;
   z-index: 0;
 }
 
-.focus-effect::after {
+*:focus {
+  outline: var(--ui-accent-color) solid 3px;
+  outline-offset: 3px;
+} */
+
+/* .focus-effect::after {
   content: '';
   display: block;
   width: 0;
@@ -55,4 +59,4 @@
 .focus-effect:focus::after {
   width: 2em;
   transition: all var(--in-duration) linear;
-}
+} */

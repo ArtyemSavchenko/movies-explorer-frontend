@@ -1,0 +1,14 @@
+.form-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--ui-accent-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+@media (any-hover: hover) {
+  .form-btn:hover {
+    opacity: 0.8;
+  }
+}
