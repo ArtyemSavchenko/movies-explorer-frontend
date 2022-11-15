@@ -53,7 +53,7 @@ const MovieCard = ({
           onClick={cbBtnClick}
         />
       )}
-      
+
     </article>
   );
 };

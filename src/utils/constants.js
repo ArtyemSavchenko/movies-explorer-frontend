@@ -1,1 +1,1 @@
-export const MOVIE_COVER_BASE_URL = 'https://api.nomoreparties.co';
+export const MOVIE_BASE_URL = 'https://api.nomoreparties.co';

@@ -1,13 +1,42 @@
+import { useEffect, useState } from 'react';
+
 import SearchMovieForm from './SearchMovieForm/SearchMovieForm';
-import MovieCard from '../../components/MovieCard/MovieCard';
+import Preloader from '../../components/ui/Preloader/Preloader';
+import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+
+import { MOVIE_BASE_URL } from '../../utils/constants';
 
 import './Movies.css';
 
 const Movies = () => {
+  const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(`${MOVIE_BASE_URL}/beatfilm-movies`)
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(res.status);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        data.length = 12;
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log('catch: ', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <section className="movies">
       <SearchMovieForm extraClass="movies__search-form" />
-      <MovieCard name="Большой куш или невероятные приключения" coverUrl="https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg" duration="115" />
+      {isLoading ? <Preloader /> : <MoviesCardList cards={cards} />}
     </section>
   );
 };

@@ -12,7 +12,7 @@ const ModernCheckbox = ({
         type="checkbox"
         className="check-box__switcher"
         checked={checked}
-        onClick={() => setChecked((checked) => !checked)}
+        onChange={() => setChecked((checked) => !checked)}
       />
       {label}
     </label>
