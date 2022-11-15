@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ModernCheckbox from '../../../components/ui/ModernCheckbox/ModernCheckbox';
+import ModernCheckbox from '../ui/ModernCheckbox/ModernCheckbox';
 
 import './SearchMovieForm.css';
 

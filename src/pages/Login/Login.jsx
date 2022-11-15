@@ -15,10 +15,6 @@ const Login = () => {
     e.preventDefault();
   }
 
-  useEffect(() => {
-    console.log(`email: ${email} ${email.length}, password ${password} ${password.length}`);
-  }, [email, password])
-
   return (
     <section className="login">
       <LogoLink extraClass="login__logo-link" funny />

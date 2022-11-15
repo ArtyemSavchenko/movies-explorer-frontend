@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { MOVIE_BASE_URL } from '../../utils/constants';
 
 import LikeBtn from '../ui/LikeBtn/LikeBtn';
 
@@ -6,10 +7,7 @@ import './MovieCard.css';
 
 const MovieCard = ({
   extraClass = '',
-  name,
-  coverUrl,
-  duration,
-  isLiked,
+  card,
   cbBtnClick,
 }) => {
   const location = useLocation();
@@ -32,17 +30,21 @@ const MovieCard = ({
     }
   };
 
+  const handleLikeClick = () => {
+    cbBtnClick(card.id);
+  }
+
   return (
     <article className={`movie-card ${extraClass}`}>
-      <h2 className="movie-card__name">{name}</h2>
-      <p className="movie-card__duration">{convertDuration(duration)}</p>
-      <img className="movie-card__cover" src={coverUrl} alt="Постер фильма." />
+      <h2 className="movie-card__name">{card.nameRU}</h2>
+      <p className="movie-card__duration">{convertDuration(card.duration)}</p>
+      <img className="movie-card__cover" src={`${MOVIE_BASE_URL}${card.image.url}`} alt="Постер фильма." />
 
       {location.pathname === '/movies' ? (
         <LikeBtn
           extraClass="movie-card__btn"
-          isLiked={isLiked}
-          onClick={cbBtnClick}
+          isLiked={card.isLiked}
+          onClick={handleLikeClick}
         >
           Сохранить
         </LikeBtn>
@@ -50,7 +52,7 @@ const MovieCard = ({
         <button
           className="movie-card__del-btn"
           aria-label="Удалить фильм из сохраненных."
-          onClick={cbBtnClick}
+          onClick={handleLikeClick}
         />
       )}
 

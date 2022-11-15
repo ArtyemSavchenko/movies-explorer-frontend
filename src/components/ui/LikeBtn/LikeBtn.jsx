@@ -3,7 +3,7 @@ import './LikeBtn.css';
 const LikeBtn = ({ extraClass = '', children, isLiked, ...restProps }) => {
   return (
     <button
-      className={`like-btn ${extraClass}${isLiked ? 'like-btn_is-liked' : ''}`}
+      className={`like-btn ${isLiked ? 'like-btn_is-liked' : ''} ${extraClass}`}
       {...restProps}
     >
       {children}
