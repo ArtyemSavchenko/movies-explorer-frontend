@@ -1,6 +1,15 @@
+import SearchMovieForm from './SearchMovieForm/SearchMovieForm';
+import MovieCard from '../../components/MovieCard/MovieCard';
+
+import './Movies.css';
+
 const Movies = () => {
   return (
-    <div>Movies</div>
-  )
-}
-export default Movies
+    <section className="movies">
+      <SearchMovieForm extraClass="movies__search-form" />
+      <MovieCard name="Большой куш или невероятные приключения" coverUrl="https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg" duration="115" />
+    </section>
+  );
+};
+
+export default Movies;
