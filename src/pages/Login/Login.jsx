@@ -18,7 +18,7 @@ const Login = () => {
   //TODO удалить тестовую функцию
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     pushNotification({
       type: 'success',
       heading: 'Бинго!',
@@ -39,6 +39,7 @@ const Login = () => {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <FormInput
             extraClass="login__input"
@@ -47,6 +48,7 @@ const Login = () => {
             autoComplete="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </fieldset>
         <FormBtn extraClass="login__submit-btn">Войти</FormBtn>

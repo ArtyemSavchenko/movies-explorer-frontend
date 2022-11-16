@@ -24,10 +24,14 @@ const Register = () => {
         <fieldset className="register__fieldset">
           <FormInput
             extraClass="register__input"
+            type="text"
             placeholder="Имя"
             autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
+            minLength="2"
+            maxLength="30"
           />
           <FormInput
             extraClass="register__input"
@@ -36,6 +40,7 @@ const Register = () => {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <FormInput
             extraClass="register__input"
@@ -44,6 +49,7 @@ const Register = () => {
             autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </fieldset>
         <FormBtn extraClass="register__submit-btn">Зарегистрироваться</FormBtn>

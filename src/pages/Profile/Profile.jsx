@@ -25,6 +25,9 @@ const Profile = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
+              minLength="2"
+              maxLength="30"
             />
             <ProfileInput
               extraClass="profile__input"
@@ -32,6 +35,7 @@ const Profile = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </fieldset>
 
