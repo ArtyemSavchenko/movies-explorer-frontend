@@ -35,7 +35,7 @@ const Movies = () => {
         return res.json();
       })
       .then((data) => {
-        data.length = 1;
+        data.length = 12;
         if (data.length === 0) {
           setIsEmptySearch(true);
         }
