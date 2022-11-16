@@ -5,11 +5,7 @@ import LikeBtn from '../ui/LikeBtn/LikeBtn';
 
 import './MovieCard.css';
 
-const MovieCard = ({
-  extraClass = '',
-  card,
-  cbBtnClick,
-}) => {
+const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
   const location = useLocation();
 
   const convertDuration = (durationNumber) => {
@@ -32,13 +28,25 @@ const MovieCard = ({
 
   const handleLikeClick = () => {
     cbBtnClick(card.id);
-  }
+  };
 
   return (
     <article className={`movie-card ${extraClass}`}>
       <h2 className="movie-card__name">{card.nameRU}</h2>
       <p className="movie-card__duration">{convertDuration(card.duration)}</p>
-      <img className="movie-card__cover" src={`${MOVIE_BASE_URL}${card.image.url}`} alt="Постер фильма." />
+      <a
+        className="movie-card__trailer-link"
+        href={card.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Ссылка на трейлер."
+      >
+        <img
+          className="movie-card__cover"
+          src={`${MOVIE_BASE_URL}${card.image.url}`}
+          alt="Постер фильма."
+        />
+      </a>
 
       {location.pathname === '/movies' ? (
         <LikeBtn
@@ -55,7 +63,6 @@ const MovieCard = ({
           onClick={handleLikeClick}
         />
       )}
-
     </article>
   );
 };
