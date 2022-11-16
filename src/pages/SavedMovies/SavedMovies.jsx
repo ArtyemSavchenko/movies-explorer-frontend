@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 import SearchMovieForm from '../../components/SearchMovieForm/SearchMovieForm';
 import Preloader from '../../components/ui/Preloader/Preloader';
+import Empty from '../../components/Empty/Empty';
 
 import { MOVIE_BASE_URL } from '../../utils/constants';
 
@@ -11,6 +12,8 @@ import './SavedMovies.css';
 const SavedMovies = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(cards.length);
 
   //TODO удалить тестовую функцию (рандомно лайкает карточки)
   useEffect(() => {
@@ -53,6 +56,9 @@ const SavedMovies = () => {
       ) : (
         <MoviesCardList cards={cards} cbBtnClick={handleDeleteCard} />
       )}
+      {cards.length === 0 && !isLoading ? (
+        <Empty heading="(┬┬﹏┬┬)" text="Здесь пока что пусто" />
+      ) : null}
     </section>
   );
 };

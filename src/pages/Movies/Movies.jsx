@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Preloader from '../../components/ui/Preloader/Preloader';
 import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
 import SearchMovieForm from '../../components/SearchMovieForm/SearchMovieForm';
+import Empty from '../../components/Empty/Empty';
 
 import { usePushNotification } from '../../components/shared/Notifications/Notifications';
 
@@ -13,12 +14,14 @@ import './Movies.css';
 const Movies = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmptySearch, setIsEmptySearch] = useState(false)
 
   const pushNotification = usePushNotification();
 
   //TODO удалить тестовую функцию - берет несколько тестовых карточек и проставляет рандомно лайки
   //TODO тестовая функция компонента выброса ошибок
   useEffect(() => {
+    setIsEmptySearch(false);
     setIsLoading(true);
     fetch(`${MOVIE_BASE_URL}/beatfilm-movies`)
       .then((res) => {
@@ -33,6 +36,9 @@ const Movies = () => {
       })
       .then((data) => {
         data.length = 12;
+        if (data.length === 0) {
+          setIsEmptySearch(true);
+        }
         const newCards = data.map((card) => {
           if (Math.random() > 0.5) {
             card.isLiked = true;
@@ -89,6 +95,9 @@ const Movies = () => {
       ) : (
         <MoviesCardList cards={cards} cbBtnClick={handleLikeCard} />
       )}
+      {isEmptySearch && !isLoading ? (
+        <Empty heading="╮（╯＿╰）╭" text="Ничего не нашлось" />
+      ) : null}
     </section>
   );
 };

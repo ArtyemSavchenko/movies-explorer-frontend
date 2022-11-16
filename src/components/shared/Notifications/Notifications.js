@@ -19,9 +19,7 @@ const Notification = ({ id, type, heading, text, onClose, delayClose }) => {
   };
 
   useEffect(() => {
-
-      setState('open');
-
+    setState('open');
     if (delayClose > 0) {
       setTimeout(() => {
         closeNotification();

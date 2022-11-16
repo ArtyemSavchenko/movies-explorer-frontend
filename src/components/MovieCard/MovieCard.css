@@ -47,6 +47,7 @@
   aspect-ratio: 300/168;
   object-fit: contain;
   object-position: center;
+  justify-self: center;
 }
 
 .movie-card__btn {
