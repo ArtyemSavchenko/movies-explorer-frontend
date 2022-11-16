@@ -19,9 +19,9 @@ const Notification = ({ id, type, heading, text, onClose, delayClose }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+
       setState('open');
-    }, 10);
+
     if (delayClose > 0) {
       setTimeout(() => {
         closeNotification();
@@ -53,33 +53,6 @@ const Notification = ({ id, type, heading, text, onClose, delayClose }) => {
 };
 
 const Notifications = ({ delayClose, children }) => {
-  const [notifications, pushNotification] = useNotification();
-
-  return (
-    <>
-      <NotificationsContext.Provider value={pushNotification}>
-        <div className={styles.notifications}>
-          {notifications.list.map((item) => (
-            <Notification
-              notifications={notifications}
-              {...item}
-              key={item.id}
-              onClose={notifications.closeNotification}
-              delayClose={
-                item.delayClose || item.delayClose === 0
-                  ? item.delayClose
-                  : delayClose
-              }
-            />
-          ))}
-        </div>
-        {children}
-      </NotificationsContext.Provider>
-    </>
-  );
-};
-
-const useNotification = () => {
   const [notifications, setNotifications] = useState([]);
 
   const pushNotification = (notification, delayClose = null) => {
@@ -107,7 +80,25 @@ const useNotification = () => {
     );
   };
 
-  return [{ list: notifications, closeNotification }, pushNotification];
+  return (
+    <NotificationsContext.Provider value={pushNotification}>
+      <div className={styles.notifications}>
+        {notifications.map((item) => (
+          <Notification
+            {...item}
+            key={item.id}
+            onClose={closeNotification}
+            delayClose={
+              item.delayClose || item.delayClose === 0
+                ? item.delayClose
+                : delayClose
+            }
+          />
+        ))}
+      </div>
+      {children}
+    </NotificationsContext.Provider>
+  );
 };
 
 export const usePushNotification = () => {

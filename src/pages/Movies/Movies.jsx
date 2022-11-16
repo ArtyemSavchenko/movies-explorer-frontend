@@ -67,9 +67,23 @@ const Movies = () => {
     });
   };
 
+  //TODO удалить демо функцию
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    pushNotification({
+      type: 'success',
+      heading: 'Поиск',
+      text: `Ищем ${e.target.name.value}`,
+    });
+  };
+
   return (
     <section className="movies">
-      <SearchMovieForm extraClass="movies__search-form" />
+      <SearchMovieForm
+        extraClass="movies__search-form"
+        onSubmit={handleSubmit}
+      />
       {isLoading ? (
         <Preloader />
       ) : (

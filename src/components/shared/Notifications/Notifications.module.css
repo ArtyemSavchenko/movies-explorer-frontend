@@ -22,7 +22,7 @@
   align-items: center;
   gap: 0.3em;
   max-height: 0;
-  transition: max-height 0.1s linear;
+  transition: max-height 0.15s linear;
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -36,8 +36,8 @@
   padding: 0;
   margin-bottom: 0;
   opacity: 0;
-  transition: opacity 0.3s linear, padding 0.1s linear 0.3s,
-    max-height 0.1s linear 0.3s, margin-bottom 0.1s linear 0.3s;
+  transition: opacity 0.3s linear, padding 0.15s linear 0.3s,
+    max-height 0.15s linear 0.3s, margin-bottom 0.15s linear 0.3s;
 }
 
 .notification_type_error {
