@@ -11,7 +11,7 @@ import './SavedMovies.css';
 
 const SavedMovies = () => {
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   console.log(cards.length);
 

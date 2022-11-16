@@ -4,6 +4,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 470px;
+  margin: 0 auto;
 }
 
 .profile__content {
@@ -39,6 +41,23 @@
 
 .profile__input {
   margin: 0 auto;
+}
+
+.profile__err-text {
+  margin: 0 auto;
+  padding-top: 5px;
+
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--attention-color);
+
+  visibility: hidden;
+}
+
+.profile__err-text_visible {
+  visibility: visible;
 }
 
 .profile__submit-btn {
@@ -82,7 +101,7 @@
   }
 }
 
-@media(min-width: 1280px) {
+@media (min-width: 1280px) {
   .profile__content {
     padding-bottom: 0;
     padding-top: 4px;

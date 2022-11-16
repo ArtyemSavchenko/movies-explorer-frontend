@@ -13,7 +13,7 @@ import './Movies.css';
 
 const Movies = () => {
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isEmptySearch, setIsEmptySearch] = useState(false);
 
   const pushNotification = usePushNotification();

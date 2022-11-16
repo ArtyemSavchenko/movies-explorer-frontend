@@ -145,6 +145,7 @@
     row-gap: 0;
     width: auto;
     overflow: visible;
+    visibility: visible;
   }
   .nav-bar__menu_opened::before {
     position: static;
