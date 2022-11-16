@@ -14,7 +14,7 @@ import './Movies.css';
 const Movies = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEmptySearch, setIsEmptySearch] = useState(false)
+  const [isEmptySearch, setIsEmptySearch] = useState(false);
 
   const pushNotification = usePushNotification();
 
@@ -35,7 +35,7 @@ const Movies = () => {
         return res.json();
       })
       .then((data) => {
-        data.length = 12;
+        data.length = 1;
         if (data.length === 0) {
           setIsEmptySearch(true);
         }
@@ -98,6 +98,9 @@ const Movies = () => {
       {isEmptySearch && !isLoading ? (
         <Empty heading="╮（╯＿╰）╭" text="Ничего не нашлось" />
       ) : null}
+      <button className="movies__more-btn" type="button">
+        Ещё
+      </button>
     </section>
   );
 };
