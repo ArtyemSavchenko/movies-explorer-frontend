@@ -11,6 +11,11 @@
   transition: opacity var(--out-duration) linear;
 }
 
+.custom-link:disabled {
+  cursor: default;
+  opacity: .4;
+}
+
 .custom-link_type_accent {
   color: var(--ui-accent-color);
 }
@@ -24,5 +29,9 @@
     opacity: .7;
 
     transition: opacity var(--in-duration) linear;
+  }
+
+  .custom-link:disabled:hover {
+    opacity: .4;
   }
 }

@@ -8,7 +8,7 @@ import './CustomLink.css';
 const CustomLink = ({
   children,
   extraClass,
-  feature = 'internal-link',
+  feature = '',
   appearance = 'default',
   ...restProps
 }) => {

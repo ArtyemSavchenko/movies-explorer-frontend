@@ -11,6 +11,14 @@
   .form-btn:hover {
     opacity: 0.8;
   }
+  .form-btn:disabled:hover {
+    opacity: 1;
+  }
+
 }
 
-/* TODO сделать дизейблед стили*/
+.form-btn:disabled {
+  background-color: #F8F8F8;
+  color: #c2c2c2;
+  cursor: default;
+}
