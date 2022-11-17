@@ -9,7 +9,8 @@
   background-color: #313131;
   border: none;
   padding: 9px 15px;
-  overflow: hidden;
+  /* TODO вернуть после сдачи оверфлоу и изменить обратно aspect-ratio и border-radius ниже для более красивого эффекта лайка */
+  /* overflow: hidden; */
 
   font-weight: 400;
   font-size: 12px;
@@ -24,11 +25,14 @@
 
 .like-btn::before {
   position: absolute;
+  display: block;
   z-index: 1;
   content: '';
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: 50%;
+  /* aspect-ratio: 1; */
+  height: 100%;
+  /* border-radius: 50%; */
+  border-radius: 30px;
 
   left: 50%;
   top: 50%;
