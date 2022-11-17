@@ -51,6 +51,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
       {location.pathname === '/movies' ? (
         <LikeBtn
           extraClass="movie-card__btn"
+          type="button"
           isLiked={card.isLiked}
           onClick={handleLikeClick}
         >
@@ -59,6 +60,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
       ) : (
         <button
           className="movie-card__del-btn"
+          type="button"
           aria-label="Удалить фильм из сохраненных."
           onClick={handleLikeClick}
         />

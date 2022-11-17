@@ -22,6 +22,7 @@ const SearchMovieForm = ({ extraClass = '', onSubmit, ...restProps }) => {
         />
         <button
           className="search-movie-form__submit-btn"
+          type="submit"
           aria-label="Найти фильм."
         />
       </div>
