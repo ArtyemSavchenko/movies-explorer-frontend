@@ -129,9 +129,7 @@
   .nav-bar__menu {
     padding-bottom: 90px;
   }
-}
 
-@media (min-width: 1280px) {
   .nav-bar__btn-close,
   .nav-bar__burger-btn {
     display: none;
@@ -147,10 +145,11 @@
     overflow: visible;
     visibility: visible;
   }
+
   .nav-bar__menu_opened::before {
     position: static;
   }
-
+  
   .nav-bar__link-box {
     flex-direction: row;
     column-gap: 20px;
