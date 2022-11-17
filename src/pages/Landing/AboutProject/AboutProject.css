@@ -4,7 +4,7 @@
 
 .about-project__text-content-box {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   column-gap: 30px;
 }
 
@@ -68,6 +68,12 @@
 
 .about-project__heading {
   margin-bottom: 60px;
+}
+
+@media(min-width: 550px) {
+  .about-project__text-content-box {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 768px) {
