@@ -8,57 +8,57 @@
   align-self: end;
 }
 
-.nav-bar__menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 0;
-  z-index: 5;
-  overflow: hidden;
-  visibility: hidden;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 100px;
-
-  padding: 0 0 45px;
-
-  background-color: var(--dark-bg-color);
-  transition: width 0.1s linear, visibility 0.1s linear;
-}
-
-.nav-bar__menu_opened {
-  width: 100%;
-  visibility: visible;
-}
-
-.nav-bar__menu_opened::before {
-  content: '';
-  z-index: -1;
+.nav-bar__menu-wrapper {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0 0 0 / 0.3);
+  z-index: 5;
+  visibility: hidden;
+  opacity: 0;
+
+  display: flex;
+  flex-direction: row-reverse;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.1s linear, visibility 0.1s linear;
 }
 
-@media (min-width: 520px) {
-  .nav-bar__menu_opened {
-    width: 520px;
-  }
+.nav-bar__menu-wrapper_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav-bar__menu-box {
+  background-color: var(--dark-bg-color);
+  width: 0;
+  max-width: 520px;
+  padding: 0 0 45px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 100px;
+
+  transition: width .1s linear;
+}
+
+.nav-bar__menu-box_opened {
+  width: 100%;
 }
 
 .nav-bar__link-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
   row-gap: 24px;
-  height: 100%;
   padding: 0;
   margin: 0;
+  max-height: 775px;
   list-style-type: none;
 }
 
@@ -126,30 +126,32 @@
 }
 
 @media (min-width: 768px) {
-  .nav-bar__menu {
-    padding-bottom: 90px;
-  }
-
   .nav-bar__btn-close,
   .nav-bar__burger-btn {
     display: none;
   }
 
-  .nav-bar__menu {
+  .nav-bar__menu-wrapper {
     position: static;
     background-color: transparent;
-    padding: 0;
     flex-direction: row;
     row-gap: 0;
     width: auto;
     overflow: visible;
     visibility: visible;
+    opacity: 1;
   }
 
-  .nav-bar__menu_opened::before {
+  .nav-bar__menu-box {
+    padding: 0;
+    width: auto;
+    background-color: transparent;
+  }
+
+  .nav-bar__menu-wrapper_opened::before {
     position: static;
   }
-  
+
   .nav-bar__link-box {
     flex-direction: row;
     column-gap: 20px;

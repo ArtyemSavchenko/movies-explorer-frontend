@@ -19,6 +19,7 @@ const SearchMovieForm = ({ extraClass = '', onSubmit, ...restProps }) => {
           type="text"
           placeholder="Фильм"
           name="name"
+          required
         />
         <button
           className="search-movie-form__submit-btn"
