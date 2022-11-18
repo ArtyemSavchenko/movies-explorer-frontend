@@ -7,7 +7,7 @@
   justify-content: center;
   justify-items: stretch;
   gap: 16px;
-  grid-template-columns: repeat(1, 300px);
+  grid-template-columns: repeat(1, minmax(auto, 300px));
 }
 
 .movies-card-list > li {
@@ -18,7 +18,7 @@
   .movies-card-list {
     column-gap: 24px;
     row-gap: 35px;
-    padding: 30px 20px;
+    padding: 30px 10px;
     grid-template-columns: repeat(2, 342px);
   }
 }
