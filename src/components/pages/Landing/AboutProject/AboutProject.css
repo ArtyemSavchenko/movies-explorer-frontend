@@ -25,10 +25,6 @@
   max-width: 255px;
 }
 
-.about-project__description {
-
-}
-
 .about-project__time-line {
   display: grid;
   grid-template-rows: repeat(2, max-content);

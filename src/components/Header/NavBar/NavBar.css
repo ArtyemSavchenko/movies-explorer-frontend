@@ -146,6 +146,7 @@
     padding: 0;
     width: auto;
     background-color: transparent;
+    overflow: visible;
   }
 
   .nav-bar__menu-wrapper_opened::before {
