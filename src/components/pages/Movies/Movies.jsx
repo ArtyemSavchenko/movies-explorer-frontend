@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import Preloader from '../../components/ui/Preloader/Preloader';
-import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
-import SearchMovieForm from '../../components/SearchMovieForm/SearchMovieForm';
-import Empty from '../../components/Empty/Empty';
 
-import { usePushNotification } from '../../components/shared/Notifications/Notifications';
+import Preloader from '../../ui/Preloader/Preloader';
+import MoviesCardList from '../../MoviesCardList/MoviesCardList';
+import SearchMovieForm from '../../SearchMovieForm/SearchMovieForm';
+import Empty from '../../Empty/Empty';
 
-import { MOVIE_BASE_URL } from '../../utils/constants';
+import { usePushNotification } from '../../shared/Notifications/Notifications';
+
+import { MOVIE_BASE_URL } from '../../../utils/constants';
 
 import './Movies.css';
 

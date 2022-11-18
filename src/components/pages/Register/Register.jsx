@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import LogoLink from '../../components/ui/LogoLink/LogoLink';
-import FormInput from '../../components/ui/FormInput/FormInput';
-import FormBtn from '../../components/ui/FormBtn/FormBtn';
-import CustomLink from '../../components/ui/CustomLink/CustomLink';
+import LogoLink from '../../ui/LogoLink/LogoLink';
+import FormInput from '../../ui/FormInput/FormInput';
+import FormBtn from '../../ui/FormBtn/FormBtn';
+import CustomLink from '../../ui/CustomLink/CustomLink';
 
 import './Register.css';
 

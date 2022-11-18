@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import CustomLink from '../../components/ui/CustomLink/CustomLink';
-import ProfileInput from '../../components/ui/ProfileInput/ProfileInput';
+import CustomLink from '../../ui/CustomLink/CustomLink';
+import ProfileInput from '../../ui/ProfileInput/ProfileInput';
 
-import { CurrentUserInfo } from '../../contexts/CurrentUserContext';
+import { CurrentUserInfo } from '../../../contexts/CurrentUserContext';
 
 import './Profile.css';
 

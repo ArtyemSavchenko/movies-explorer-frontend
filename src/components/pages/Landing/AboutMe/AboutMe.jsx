@@ -1,8 +1,8 @@
-import photo from '../../../images/about-me-photo.webp';
+import photo from '../../../../images/about-me-photo.webp';
 
+import CustomLink from '../../../ui/CustomLink/CustomLink';
 import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
-import CustomLink from '../../../components/ui/CustomLink/CustomLink';
 
 import './AboutMe.css';
 

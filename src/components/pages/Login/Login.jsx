@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import LogoLink from '../../components/ui/LogoLink/LogoLink';
-import FormInput from '../../components/ui/FormInput/FormInput';
-import FormBtn from '../../components/ui/FormBtn/FormBtn';
-import CustomLink from '../../components/ui/CustomLink/CustomLink';
 
-import { usePushNotification } from '../../components/shared/Notifications/Notifications';
+import FormInput from '../../ui/FormInput/FormInput';
+import LogoLink from '../../ui/LogoLink/LogoLink';
+import FormBtn from '../../ui/FormBtn/FormBtn';
+import CustomLink from '../../ui/CustomLink/CustomLink';
+
+import { usePushNotification } from '../../shared/Notifications/Notifications';
 
 import './Login.css';
 

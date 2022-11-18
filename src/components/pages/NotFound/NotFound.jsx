@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import CustomLink from '../../components/ui/CustomLink/CustomLink';
+import CustomLink from '../../ui/CustomLink/CustomLink';
 
 import './NotFound.css';
 

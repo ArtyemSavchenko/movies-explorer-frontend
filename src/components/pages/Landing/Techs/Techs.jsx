@@ -2,7 +2,7 @@ import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
 import Tech from '../Tech/Tech';
 
-import { generateId } from '../../../utils/generateId';
+import { generateId } from '../../../../utils/generateId';
 
 import './Techs.css';
 

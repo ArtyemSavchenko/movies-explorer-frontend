@@ -1,4 +1,4 @@
-import promoImg from '../../../images/promo-logo.svg';
+import promoImg from '../../../../images/promo-logo.svg';
 
 import './Promo.css';
 
