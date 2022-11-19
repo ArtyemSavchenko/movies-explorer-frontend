@@ -1,0 +1,38 @@
+.profile-input {
+  display: flex;
+  flex-direction: row-reverse;
+  column-gap: 10px;
+  padding: 16px 0;
+  box-sizing: border-box;
+  max-width: 410px;
+  width: 100%;
+
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.18;
+  white-space: nowrap;
+}
+
+.profile-input:not(:last-of-type) {
+  border-bottom: 1px solid #424242;
+}
+
+.profile-input__input {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 100%;
+
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-align: right;
+}
+
+.profile-input__input:focus + .profile-input__label {
+  color: var(--ui-accent-color);
+}
+
+.profile-input__input:focus {
+  outline: none;
+}

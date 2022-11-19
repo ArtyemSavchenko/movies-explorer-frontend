@@ -1,0 +1,38 @@
+@import url('./vendor/normalize.css');
+@import url('./vendor/fonts/fonts.css');
+
+:root {
+  --dark-bg-color: #202020;
+  --promo-bg-color: #073042;
+  --accent-color: #3ddc84;
+  --attention-color: #ee3465;
+  --ui-accent-color: #4285f4;
+  --base-text-color: #fff;
+
+  --main-font: 'Inter', 'Arial', sans-serif;
+
+  --in-duration: .15s;
+  --out-duration: .25s;
+
+  scroll-behavior: smooth;
+}
+
+#root {
+  display: grid;
+  font-family: var(--main-font);
+  color: var(--base-text-color);
+
+  background-color: var(--dark-bg-color);
+
+  min-height: 100vh;
+}
+
+* {
+  font-family: inherit;
+  color: inherit;
+}
+
+*:focus-visible {
+  outline: 3px var(--ui-accent-color) solid;
+  outline-offset: 5px;
+}

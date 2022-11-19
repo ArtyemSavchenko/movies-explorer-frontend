@@ -1,0 +1,24 @@
+.form-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--ui-accent-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+@media (any-hover: hover) {
+  .form-btn:hover {
+    opacity: 0.8;
+  }
+  .form-btn:disabled:hover {
+    opacity: 1;
+  }
+
+}
+
+.form-btn:disabled {
+  background-color: #F8F8F8;
+  color: #c2c2c2;
+  cursor: default;
+}
