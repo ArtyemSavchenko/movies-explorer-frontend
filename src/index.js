@@ -6,16 +6,19 @@ import { router } from './routes/routes';
 
 import Preloader from './components/ui/Preloader/Preloader';
 import Notifications from './components/shared/Notifications/Notifications';
+import AuthProvider from './components/AuthProvider/AuthProvider';
 
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <StrictMode>
-  <Suspense fallback={<Preloader />}>
-    <Notifications delayClose={5000}>
-      <RouterProvider router={router} />
-    </Notifications>
-  </Suspense>
-  // </StrictMode>
+  <StrictMode>
+    <Suspense fallback={<Preloader />}>
+        <AuthProvider>
+      <Notifications delayClose={5000}>
+          <RouterProvider router={router} />
+      </Notifications>
+        </AuthProvider>
+    </Suspense>
+  </StrictMode>
 );

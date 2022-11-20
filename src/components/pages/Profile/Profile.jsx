@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import CustomLink from '../../ui/CustomLink/CustomLink';
 import ProfileInput from '../../ui/ProfileInput/ProfileInput';
 
-import { CurrentUserInfo } from '../../../contexts/CurrentUserContext';
+import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
 import './Profile.css';
 
 const Profile = () => {
-  const currentUser = useContext(CurrentUserInfo);
+  const {user, signOut }= useContext(CurrentUser);
 
-  const [name, setName] = useState(currentUser.name);
-  const [email, setEmail] = useState(currentUser.email);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
 
   const [isDirty, setIsDirty] = useState(false);
   const [firstEditing, setFirstEditing] = useState(true);
@@ -20,22 +20,22 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (name === currentUser.name && email === currentUser.email) {
+    if (name === user.name && email === user.email) {
       setIsDirty(true);
     } else {
       setIsDirty(false);
       setFirstEditing(false);
     }
-  }, [name, email, currentUser]);
+  }, [name, email, user]);
 
   const handleSignOut = () => {
-    navigate('/');
+    signOut(navigate('/'));
   };
 
   return (
     <section className="profile">
       <div className="profile__content">
-        <p className="profile__heading">Привет, {currentUser.name}!</p>
+        <p className="profile__heading">Привет, {user.name}!</p>
 
         <form className="profile__form">
           <fieldset className="profile__fieldset">

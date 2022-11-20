@@ -1,30 +1,48 @@
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import FormInput from '../../ui/FormInput/FormInput';
 import LogoLink from '../../ui/LogoLink/LogoLink';
 import FormBtn from '../../ui/FormBtn/FormBtn';
 import CustomLink from '../../ui/CustomLink/CustomLink';
 
+import { CurrentUser } from '../../../contexts/CurrentUserContext';
+
 import { usePushNotification } from '../../shared/Notifications/Notifications';
+import { authorize, getUser } from '../../../utils/MainApi';
 
 import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { signIn } = useContext(CurrentUser);
+  const navigate = useNavigate();
   const pushNotification = usePushNotification();
 
-  //TODO удалить тестовую функцию
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    pushNotification({
-      type: 'success',
-      heading: 'Бинго!',
-      text: 'Вы будете перенаправлены (нет)',
-    });
+    setIsSubmitting(true);
+    try {
+      const res = await authorize(email, password);
+      localStorage.setItem('jwt', res.token);
+
+      const user = await getUser();
+      signIn(user, () => {
+        navigate('/movies');
+      });
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: err.message,
+      });
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -52,7 +70,7 @@ const Login = () => {
             required
           />
         </fieldset>
-        <FormBtn extraClass="login__submit-btn">Войти</FormBtn>
+        <FormBtn extraClass="login__submit-btn" isLoading={isSubmitting}>Войти</FormBtn>
         <p className="login__caption">
           Ещё не зарегистрированы?{' '}
           <CustomLink

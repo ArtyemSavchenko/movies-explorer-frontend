@@ -8,7 +8,7 @@ import Empty from '../../Empty/Empty';
 
 import { usePushNotification } from '../../shared/Notifications/Notifications';
 
-import { MOVIE_API_URL } from '../../../utils/constants';
+import { MOVIE_COVER_URL } from '../../../utils/constants';
 
 import './Movies.css';
 
@@ -24,7 +24,7 @@ const Movies = () => {
   useEffect(() => {
     setIsEmptySearch(false);
     setIsLoading(true);
-    fetch(MOVIE_API_URL)
+    fetch(MOVIE_COVER_URL)
       .then((res) => {
         if (!res.ok) {
           const status = res.status;

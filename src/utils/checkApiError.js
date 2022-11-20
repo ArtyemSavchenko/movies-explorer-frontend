@@ -1,6 +1,8 @@
 export const checkApiError = async (res) => {
   if (!res.ok) {
-    throw res;
+    const err = await res.json();
+    err.status = res.status;
+    throw err;
   }
 
   return res.json();
