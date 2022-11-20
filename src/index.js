@@ -14,11 +14,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
     <Suspense fallback={<Preloader />}>
-        <AuthProvider>
-      <Notifications delayClose={5000}>
+      <AuthProvider>
+        <Notifications delayClose={5000}>
           <RouterProvider router={router} />
-      </Notifications>
-        </AuthProvider>
+        </Notifications>
+      </AuthProvider>
     </Suspense>
   </StrictMode>
 );

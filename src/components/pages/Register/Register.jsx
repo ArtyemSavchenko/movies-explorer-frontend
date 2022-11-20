@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import LogoLink from '../../ui/LogoLink/LogoLink';
 import FormInput from '../../ui/FormInput/FormInput';
 import FormBtn from '../../ui/FormBtn/FormBtn';
 import CustomLink from '../../ui/CustomLink/CustomLink';
+
+import { usePushNotification } from '../../shared/Notifications/Notifications';
+import { authorize, register } from '../../../utils/MainApi';
+
+import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
 import './Register.css';
 
@@ -11,10 +17,37 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRegister = (e) => {
+  const { signIn } = useContext(CurrentUser);
+
+  const navigate = useNavigate();
+  const pushNotification = usePushNotification();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-  }
+
+    setIsSubmitting(true);
+    try {
+      const user = await register(email, password, name);
+
+      if (user) {
+        const { token } = await authorize(email, password);
+        localStorage.setItem('jwt', token);
+
+        signIn(user, () => {
+          navigate('/movies');
+        });
+      }
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: err.message,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="register">
@@ -52,10 +85,17 @@ const Register = () => {
             required
           />
         </fieldset>
-        <FormBtn extraClass="register__submit-btn">Зарегистрироваться</FormBtn>
+        <FormBtn extraClass="register__submit-btn" isLoading={isSubmitting}>
+          Зарегистрироваться
+        </FormBtn>
         <p className="register__caption">
           Уже зарегистрированы?{' '}
-          <CustomLink feature="internal-link" appearance="accent" extraClass="register__caption-link" to='/signin'>
+          <CustomLink
+            feature="internal-link"
+            appearance="accent"
+            extraClass="register__caption-link"
+            to="/signin"
+          >
             Войти
           </CustomLink>
         </p>

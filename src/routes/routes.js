@@ -3,7 +3,6 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
 import ProtectedAuthRoute from '../components/ProtectedAuthRoute/ProtectedAuthRoute';
-import { getUser } from '../utils/MainApi';
 
 const Landing = lazy(() => import('../components/pages/Landing/Landing'));
 const NotFound = lazy(() => import('../components/pages/NotFound/NotFound'));

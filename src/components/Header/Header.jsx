@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <header className={`header${isLanding ? ' header_landing' : ''}`}>
       <LogoLink funny />
-      {user === null ? null : user._id ? <NavBar /> : <SignMenu />}
+      {user ? <NavBar /> : <SignMenu />}
     </header>
   );
 };

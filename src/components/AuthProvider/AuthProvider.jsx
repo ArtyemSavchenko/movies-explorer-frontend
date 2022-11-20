@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
 
   const signOut = (callback) => {
     localStorage.removeItem('jwt');
-    setUser({});
+    setUser(null);
 
     if (callback) {
       callback();

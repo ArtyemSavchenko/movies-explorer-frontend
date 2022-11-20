@@ -27,8 +27,8 @@ const Login = () => {
 
     setIsSubmitting(true);
     try {
-      const res = await authorize(email, password);
-      localStorage.setItem('jwt', res.token);
+      const { token } = await authorize(email, password);
+      localStorage.setItem('jwt', token);
 
       const user = await getUser();
       signIn(user, () => {
@@ -39,7 +39,6 @@ const Login = () => {
         type: 'error',
         text: err.message,
       });
-      return;
     } finally {
       setIsSubmitting(false);
     }
@@ -70,7 +69,9 @@ const Login = () => {
             required
           />
         </fieldset>
-        <FormBtn extraClass="login__submit-btn" isLoading={isSubmitting}>Войти</FormBtn>
+        <FormBtn extraClass="login__submit-btn" isLoading={isSubmitting}>
+          Войти
+        </FormBtn>
         <p className="login__caption">
           Ещё не зарегистрированы?{' '}
           <CustomLink
