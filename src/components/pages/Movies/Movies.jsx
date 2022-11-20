@@ -8,7 +8,7 @@ import Empty from '../../Empty/Empty';
 
 import { usePushNotification } from '../../shared/Notifications/Notifications';
 
-import { MOVIE_BASE_URL } from '../../../utils/constants';
+import { MOVIE_API_URL } from '../../../utils/constants';
 
 import './Movies.css';
 
@@ -24,7 +24,7 @@ const Movies = () => {
   useEffect(() => {
     setIsEmptySearch(false);
     setIsLoading(true);
-    fetch(`${MOVIE_BASE_URL}/beatfilm-movies`)
+    fetch(MOVIE_API_URL)
       .then((res) => {
         if (!res.ok) {
           const status = res.status;
@@ -76,12 +76,10 @@ const Movies = () => {
 
   //TODO удалить демо функцию
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     pushNotification({
       type: 'success',
       heading: 'Поиск',
-      text: `Ищем ${e.target.name.value}`,
+      text: `Ищем`,
     });
   };
 
