@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { emailRegExp, nameRegExp } from '../utils/constants';
 
-const validate = (value, params) => {
+const checkValidationErr = (value, params) => {
   for (const key in params) {
     switch (key) {
       case 'required':
@@ -44,7 +44,7 @@ const validate = (value, params) => {
 export const useValidationInput = (initialValue, params) => {
   const [value, setValue] = useState(initialValue);
   const [err, setErr] = useState('');
-  const [isValid, setIsValid] = useState(validate(value, params) === '');
+  const [isValid, setIsValid] = useState(!checkValidationErr(value, params));
 
   const onChange = (e) => {
     setErr('');
@@ -52,7 +52,7 @@ export const useValidationInput = (initialValue, params) => {
     const inputValue = e.target.value;
     setValue(inputValue);
 
-    const err = validate(inputValue, params);
+    const err = checkValidationErr(inputValue, params);
 
     setIsValid(!err);
     setErr(err);

@@ -8,10 +8,14 @@ import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
 import { useValidationInput } from '../../../hook/useValidationInput';
 
+import { patchUser } from '../../../utils/MainApi';
+import { usePushNotification } from '../../shared/Notifications/Notifications';
+
 import './Profile.css';
 
+//TODO Сделать красивые ошибки валидации
 const Profile = () => {
-  const { user, signOut } = useContext(CurrentUser);
+  const { user, signIn, signOut } = useContext(CurrentUser);
 
   const [name, nameErr, nameIsValid, onChangeName] = useValidationInput(
     user.name,
@@ -52,6 +56,31 @@ const Profile = () => {
   }, [name, email, user]);
 
   const navigate = useNavigate();
+  const pushNotification = usePushNotification();
+
+  const handleEditProfile = async (e) => {
+    e.preventDefault();
+
+    try {
+      const user = await patchUser(name, email);
+
+      if (user) {
+        setIsFirstEditing(true);
+
+        signIn(user);
+        pushNotification({
+          type: 'success',
+          heading: '(〃￣︶￣)人(￣︶￣〃)',
+          text: 'Данные успешно обновлены',
+        });
+      }
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: err.message,
+      });
+    }
+  };
 
   const handleSignOut = () => {
     signOut(navigate('/'));
@@ -113,6 +142,7 @@ const Profile = () => {
             feature="button"
             type="submit"
             disabled={!isValidForm}
+            onClick={handleEditProfile}
           >
             Редактировать
           </CustomLink>

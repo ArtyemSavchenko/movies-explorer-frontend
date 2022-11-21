@@ -46,3 +46,19 @@ export const getUser = async () => {
 
   return checkApiError(res);
 };
+
+export const patchUser = async (name, email) => {
+  const res = await fetch(`${MAIN_BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getToken(),
+    },
+    body: JSON.stringify({
+      name,
+      email,
+    }),
+  });
+
+  return checkApiError(res);
+};
