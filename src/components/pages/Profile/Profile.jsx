@@ -6,27 +6,52 @@ import ProfileInput from '../../ui/ProfileInput/ProfileInput';
 
 import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
+import { useValidationInput } from '../../../hook/useValidationInput';
+
 import './Profile.css';
 
 const Profile = () => {
-  const {user, signOut }= useContext(CurrentUser);
+  const { user, signOut } = useContext(CurrentUser);
 
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+  const [name, nameErr, nameIsValid, onChangeName] = useValidationInput(
+    user.name,
+    {
+      required: true,
+      isName: true,
+      minLength: 2,
+      maxLength: 30,
+    }
+  );
+  const [email, emailErr, emailIsValid, onChangeEmail] = useValidationInput(
+    user.email,
+    {
+      required: true,
+      isEmail: true,
+    }
+  );
 
-  const [isDirty, setIsDirty] = useState(false);
-  const [firstEditing, setFirstEditing] = useState(true);
-
-  const navigate = useNavigate();
+  const [isDataChanged, setIsDataChanged] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(true);
+  const [isFirstEditing, setIsFirstEditing] = useState(true);
 
   useEffect(() => {
-    if (name === user.name && email === user.email) {
-      setIsDirty(true);
+    if (nameIsValid && emailIsValid && isDataChanged) {
+      setIsValidForm(true);
     } else {
-      setIsDirty(false);
-      setFirstEditing(false);
+      setIsValidForm(false);
+    }
+  }, [nameIsValid, emailIsValid, isDataChanged]);
+
+  useEffect(() => {
+    if (name !== user.name || email !== user.email) {
+      setIsFirstEditing(false);
+      setIsDataChanged(true);
+    } else {
+      setIsDataChanged(false);
     }
   }, [name, email, user]);
+
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     signOut(navigate('/'));
@@ -44,7 +69,7 @@ const Profile = () => {
               label="Имя"
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={onChangeName}
               required
               minLength="2"
               maxLength="30"
@@ -54,30 +79,32 @@ const Profile = () => {
               label="E-mail"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={onChangeEmail}
               required
             />
 
             <p
               className={`profile__err-text${
-                isDirty && !firstEditing ? ' profile__err-text_visible' : ''
+                !isDataChanged && !isFirstEditing
+                  ? ' profile__err-text_visible'
+                  : ''
               }`}
             >
               Новые данные совпадают со старыми
             </p>
             <p
               className={`profile__err-text${
-                false ? ' profile__err-text_visible' : ''
+                !nameIsValid ? ' profile__err-text_visible' : ''
               }`}
             >
-              {'ошибки имени'}
+              {nameErr}
             </p>
             <p
               className={`profile__err-text${
-                false ? ' profile__err-text_visible' : ''
+                !emailIsValid ? ' profile__err-text_visible' : ''
               }`}
             >
-              {'ошибки почты'}
+              {emailErr}
             </p>
           </fieldset>
 
@@ -85,7 +112,7 @@ const Profile = () => {
             extraClass="profile__submit-btn"
             feature="button"
             type="submit"
-            disabled={isDirty}
+            disabled={!isValidForm}
           >
             Редактировать
           </CustomLink>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import FormInput from '../../ui/FormInput/FormInput';
@@ -11,11 +11,32 @@ import { CurrentUser } from '../../../contexts/CurrentUserContext';
 import { usePushNotification } from '../../shared/Notifications/Notifications';
 import { authorize, getUser } from '../../../utils/MainApi';
 
+import { useValidationInput } from '../../../hook/useValidationInput';
+
 import './Login.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, emailErr, emailIsValid, onChangeEmail] = useValidationInput(
+    '',
+    {
+      required: true,
+      isEmail: true,
+    }
+  );
+  const [password, passwordErr, passwordIsValid, onChangePassword] =
+    useValidationInput('', {
+      required: true,
+    });
+
+  const [isValidForm, setIsValidForm] = useState(true);
+  useEffect(() => {
+    if (emailIsValid && passwordIsValid) {
+      setIsValidForm(true);
+    } else {
+      setIsValidForm(false);
+    }
+  }, [emailIsValid, passwordIsValid]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { signIn } = useContext(CurrentUser);
@@ -56,7 +77,8 @@ const Login = () => {
             placeholder="E-mail"
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={onChangeEmail}
+            error={emailErr}
             required
           />
           <FormInput
@@ -65,11 +87,16 @@ const Login = () => {
             placeholder="Пароль"
             autoComplete="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChangePassword}
+            error={passwordErr}
             required
           />
         </fieldset>
-        <FormBtn extraClass="login__submit-btn" isLoading={isSubmitting}>
+        <FormBtn
+          extraClass="login__submit-btn"
+          disabled={!isValidForm}
+          isLoading={isSubmitting}
+        >
           Войти
         </FormBtn>
         <p className="login__caption">
