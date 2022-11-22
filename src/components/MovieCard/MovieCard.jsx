@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { MOVIE_BASE_URL } from '../../utils/constants';
+import { MOVIE_COVER_URL } from '../../utils/constants';
 
 import LikeBtn from '../ui/LikeBtn/LikeBtn';
 
@@ -43,7 +43,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
       >
         <img
           className="movie-card__cover"
-          src={`${MOVIE_BASE_URL}${card.image.url}`}
+          src={`${MOVIE_COVER_URL}${card.image.url}`}
           alt="Постер фильма."
         />
       </a>

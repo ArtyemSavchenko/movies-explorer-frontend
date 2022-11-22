@@ -4,9 +4,15 @@ import ModernCheckbox from '../ui/ModernCheckbox/ModernCheckbox';
 
 import './SearchMovieForm.css';
 
-const SearchMovieForm = ({ extraClass = '', onSubmit, ...restProps }) => {
-  const [movieName, setMovieName] = useState('')
-  const [isShortMovies, setIsShortMovies] = useState(false);
+const SearchMovieForm = ({
+  extraClass = '',
+  onSubmit,
+  isShortMovies,
+  setIsShortMovies,
+  movieName,
+  setMovieName,
+  ...restProps
+}) => {
   const [searchErr, setSearchErr] = useState('');
 
   const handleSubmit = (e) => {
@@ -16,14 +22,14 @@ const SearchMovieForm = ({ extraClass = '', onSubmit, ...restProps }) => {
       setSearchErr('Нужно ввести ключевое слово');
       return;
     }
-    
+
     onSubmit();
-  }
+  };
 
   const inputMovieName = (e) => {
     setSearchErr('');
     setMovieName(e.target.value);
-  }
+  };
 
   return (
     <form

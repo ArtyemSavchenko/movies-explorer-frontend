@@ -1,93 +1,95 @@
 import { useEffect, useState } from 'react';
 
-
 import Preloader from '../../ui/Preloader/Preloader';
 import MoviesCardList from '../../MoviesCardList/MoviesCardList';
 import SearchMovieForm from '../../SearchMovieForm/SearchMovieForm';
 import Empty from '../../Empty/Empty';
 
+import { getMovies } from '../../../utils/MoviesApi';
+import { filterMovies } from '../../../utils/searchUtils';
 import { usePushNotification } from '../../shared/Notifications/Notifications';
-
-import { MOVIE_COVER_URL } from '../../../utils/constants';
 
 import './Movies.css';
 
 const Movies = () => {
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isEmptySearch, setIsEmptySearch] = useState(false);
+  const [isMoreResultBtnVisible, setIsMoreResultBtnVisible] = useState(false);
+  const [movieName, setMovieName] = useState('');
+  const [isShortMovies, setIsShortMovies] = useState(false);
 
   const pushNotification = usePushNotification();
 
-  //TODO удалить тестовую функцию - берет несколько тестовых карточек и проставляет рандомно лайки
-  //TODO тестовая функция компонента выброса ошибок
-  useEffect(() => {
-    setIsEmptySearch(false);
-    setIsLoading(true);
-    fetch(MOVIE_COVER_URL)
-      .then((res) => {
-        if (!res.ok) {
-          const status = res.status;
-          return res.json().then((err) => {
-            err.status = status;
-            return Promise.reject(err);
-          });
-        }
-        return res.json();
-      })
-      .then((data) => {
-        data.length = 12;
-        if (data.length === 0) {
-          setIsEmptySearch(true);
-        }
-        const newCards = data.map((card) => {
-          if (Math.random() > 0.5) {
-            card.isLiked = true;
-          } else {
-            card.isLiked = false;
-          }
-          return card;
-        });
-        setCards(newCards);
-      })
-      .catch((err) => {
-        pushNotification({
-          type: 'error',
-          heading: err.status,
-          text: err.message,
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
   //TODO удалить тестовую функцию - лайкает карточки
-  const handleLikeCard = (id) => {
-    setCards((cards) => {
-      return cards.map((card) => {
-        if (card.id === id) {
-          card.isLiked = !card.isLiked;
-        }
-        return card;
-      });
-    });
-  };
+  const handleLikeCard = (id) => {};
 
   //TODO удалить демо функцию
-  const handleSubmit = (e) => {
-    pushNotification({
-      type: 'success',
-      heading: 'Поиск',
-      text: `Ищем`,
-    });
+  const handleSubmit = async (e) => {
+    setIsEmptySearch(false);
+    setIsLoading(true);
+
+    try {
+      const movies = await getMovies();
+
+      const filteredMovies = filterMovies(movies, {
+        string: movieName,
+        isShortMovies: isShortMovies,
+      });
+      setCards(filteredMovies);
+
+      if (filteredMovies.length === 0) {
+        setIsEmptySearch(true);
+      }
+
+      localStorage.setItem(
+        'last-result',
+        JSON.stringify({
+          movieName,
+          isShortMovies,
+          filteredMovies,
+        })
+      );
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+
+    const lastResultString = localStorage.getItem('last-result');
+    if (!lastResultString) {
+      return;
+    }
+
+    const { movieName, isShortMovies, filteredMovies } =
+      JSON.parse(lastResultString);
+
+    setMovieName(movieName);
+    setIsShortMovies(isShortMovies);
+    setCards(filteredMovies);
+
+    if (filteredMovies.length === 0) {
+      setIsEmptySearch(true);
+    } else {
+      setIsEmptySearch(false);
+    }
+  }, []);
 
   return (
     <section className="movies">
       <SearchMovieForm
         extraClass="movies__search-form"
         onSubmit={handleSubmit}
+        movieName={movieName}
+        setMovieName={setMovieName}
+        isShortMovies={isShortMovies}
+        setIsShortMovies={setIsShortMovies}
       />
       {isLoading ? (
         <Preloader />
@@ -97,7 +99,12 @@ const Movies = () => {
       {isEmptySearch && !isLoading ? (
         <Empty heading="╮（╯＿╰）╭" text="Ничего не нашлось" />
       ) : null}
-      <button className="movies__more-btn" type="button">
+      <button
+        className={`movies__more-btn${
+          isMoreResultBtnVisible ? ' movies__more-btn_visible' : ''
+        }`}
+        type="button"
+      >
         Ещё
       </button>
     </section>

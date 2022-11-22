@@ -13,48 +13,21 @@ import { usePushNotification } from '../../../components/shared/Notifications/No
 const SavedMovies = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isShortMovies, setIsShortMovies] = useState(false);
 
   const pushNotification = usePushNotification();
 
-  const initMovies = async () => {
-    setIsLoading(true);
-    try {
-      const movies = await getMovies();
-
-      movies.length = 12;
-      const cards = movies.filter(() => {
-        if (Math.random() > 0.5) {
-          return true;
-        }
-        return false;
-      });
-
-      setCards(cards);
-    } catch (err) {
-      pushNotification({
-        type: 'error',
-        heading: err.status,
-        text: err.message,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  //TODO удалить тестовую функцию (рандомно лайкает карточки)
-  useEffect(() => {
-    initMovies();
-    // throw new Response('hello');
-  }, []);
-
-  //TODO удалить тестовую функцию - удаляет тестовые лайки
   const handleDeleteCard = (id) => {
-    setCards((cards) => cards.filter((card) => card.id !== id));
+
   };
 
   return (
     <section className="saved-movies">
-      <SearchMovieForm extraClass="saved-movies__search-form" />
+      <SearchMovieForm
+        extraClass="saved-movies__search-form"
+        isShortMovies={isShortMovies}
+        setIsShortMovies={setIsShortMovies}
+      />
       {isLoading ? (
         <Preloader />
       ) : (

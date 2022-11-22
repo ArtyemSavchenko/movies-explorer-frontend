@@ -1,24 +1,24 @@
 import { useState } from 'react';
 
-import { emailRegExp, nameRegExp } from '../utils/constants';
+import { EMAIL_REG_EXP, NAME_REG_EXP } from '../utils/constants';
 
-const checkValidationErr = (value, params) => {
+const checkValidationErr = (value, params, errors) => {
   for (const key in params) {
     switch (key) {
       case 'required':
         if (value === '') {
-          return 'Пропущено обязательное поле';
+          return errors?.required || 'Пропущено обязательное поле';
         }
         break;
 
       case 'isName':
-        if (!value.match(nameRegExp)) {
+        if (!value.match(NAME_REG_EXP)) {
           return 'Имя может содержать только латиницу, кириллицу, пробел и дефис';
         }
         break;
 
       case 'isEmail':
-        if (!value.match(emailRegExp)) {
+        if (!value.match(EMAIL_REG_EXP)) {
           return 'Введенный адрес некорректен';
         }
         break;
@@ -41,7 +41,7 @@ const checkValidationErr = (value, params) => {
   }
 };
 
-export const useValidationInput = (initialValue, params) => {
+export const useValidationInput = (initialValue, params, errors) => {
   const [value, setValue] = useState(initialValue);
   const [err, setErr] = useState('');
   const [isValid, setIsValid] = useState(!checkValidationErr(value, params));
@@ -52,7 +52,7 @@ export const useValidationInput = (initialValue, params) => {
     const inputValue = e.target.value;
     setValue(inputValue);
 
-    const err = checkValidationErr(inputValue, params);
+    const err = checkValidationErr(inputValue, params, errors);
 
     setIsValid(!err);
     setErr(err);
