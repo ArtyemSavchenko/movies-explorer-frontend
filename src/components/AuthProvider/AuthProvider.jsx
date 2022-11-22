@@ -4,6 +4,7 @@ import { CurrentUser } from '../../contexts/CurrentUserContext';
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [likedCards, setLikedCards] = useState([]);
 
   const signIn = (user, callback) => {
     setUser(user);
@@ -15,6 +16,7 @@ const AuthProvider = ({ children }) => {
 
   const signOut = (callback) => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('last-result');
     setUser(null);
 
     if (callback) {
@@ -22,7 +24,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const providerValue = { user, signIn, signOut };
+  const providerValue = { user, signIn, signOut, likedCards, setLikedCards };
 
   return (
     <CurrentUser.Provider value={providerValue}>

@@ -7,13 +7,13 @@ import Header from './components/Header/Header';
 import Preloader from './components/ui/Preloader/Preloader';
 
 import { CurrentUser } from './contexts/CurrentUserContext';
-import { getUser } from './utils/MainApi';
+import { getLikedMovies, getUser } from './utils/MainApi';
 
 import './App.css';
 
 const App = () => {
   const [isCheckingToken, setIsCheckingToken] = useState(true);
-  const { signIn } = useContext(CurrentUser);
+  const { signIn, setLikedCards } = useContext(CurrentUser);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -27,6 +27,8 @@ const App = () => {
         const user = await getUser();
         if (user) {
           signIn(user);
+          const likedMovies = await getLikedMovies();
+          setLikedCards(likedMovies);
         }
       } finally {
         setIsCheckingToken(false);

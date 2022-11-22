@@ -7,9 +7,9 @@ import ProfileInput from '../../ui/ProfileInput/ProfileInput';
 import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
 import { useValidationInput } from '../../../hook/useValidationInput';
+import { usePushNotification } from '../../shared/Notifications/Notifications';
 
 import { patchUser } from '../../../utils/MainApi';
-import { usePushNotification } from '../../shared/Notifications/Notifications';
 
 import './Profile.css';
 

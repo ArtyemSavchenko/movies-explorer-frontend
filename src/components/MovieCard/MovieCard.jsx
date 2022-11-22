@@ -1,12 +1,17 @@
+import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MOVIE_COVER_URL } from '../../utils/constants';
 
 import LikeBtn from '../ui/LikeBtn/LikeBtn';
+
+import { MOVIE_COVER_URL } from '../../utils/constants';
+
+import { CurrentUser } from '../../contexts/CurrentUserContext';
 
 import './MovieCard.css';
 
 const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
   const location = useLocation();
+  const { user } = useContext(CurrentUser);
 
   const convertDuration = (durationNumber) => {
     const lastTwoDigits = durationNumber % 100;
@@ -27,7 +32,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
   };
 
   const handleLikeClick = () => {
-    cbBtnClick(card.id);
+    cbBtnClick(card);
   };
 
   return (
@@ -43,7 +48,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
       >
         <img
           className="movie-card__cover"
-          src={`${MOVIE_COVER_URL}${card.image.url}`}
+          src={typeof card.image === 'string' ? card.image : `${MOVIE_COVER_URL}${card.image.url}`}
           alt="Постер фильма."
         />
       </a>
@@ -52,7 +57,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
         <LikeBtn
           extraClass="movie-card__btn"
           type="button"
-          isLiked={card.isLiked}
+          isLiked={card.owner === user._id}
           onClick={handleLikeClick}
         >
           Сохранить

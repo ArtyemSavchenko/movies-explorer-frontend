@@ -1,41 +1,66 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import MoviesCardList from '../../MoviesCardList/MoviesCardList';
 import SearchMovieForm from '../../SearchMovieForm/SearchMovieForm';
-import Preloader from '../../ui/Preloader/Preloader';
 import Empty from '../../Empty/Empty';
+
+import { usePushNotification } from '../../../components/shared/Notifications/Notifications';
+import { CurrentUser } from '../../../contexts/CurrentUserContext';
+
+import { filterMovies } from '../../../utils/searchUtils';
+import { dislikeMovie } from '../../../utils/MainApi';
 
 import './SavedMovies.css';
 
-import { getMovies } from '../../../utils/MoviesApi';
-import { usePushNotification } from '../../../components/shared/Notifications/Notifications';
-
 const SavedMovies = () => {
-  const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { likedCards, setLikedCards } = useContext(CurrentUser);
+
+  const [cards, setCards] = useState(likedCards);
+  const [movieName, setMovieName] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);
 
   const pushNotification = usePushNotification();
 
-  const handleDeleteCard = (id) => {
-
+  const handleSearch = () => {
+    setCards(filterMovies(likedCards, { string: movieName, isShortMovies }));
   };
+
+  const handleDeleteCard = async (card) => {
+    try {
+      await dislikeMovie(card._id);
+      setLikedCards(
+        likedCards.filter((likedCard) => likedCard._id !== card._id)
+      );
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: err.message,
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [likedCards]);
 
   return (
     <section className="saved-movies">
       <SearchMovieForm
         extraClass="saved-movies__search-form"
+        onSubmit={handleSearch}
+        movieName={movieName}
+        setMovieName={setMovieName}
         isShortMovies={isShortMovies}
         setIsShortMovies={setIsShortMovies}
       />
-      {isLoading ? (
-        <Preloader />
+
+      {likedCards.length === 0 ? (
+        <Empty heading="(┬┬﹏┬┬)" text="Вы не добавили ни одного фильма" />
+      ) : cards.length === 0 ? (
+        <Empty heading="(┬┬﹏┬┬)" text="Ничего не найдено" />
       ) : (
         <MoviesCardList cards={cards} cbBtnClick={handleDeleteCard} />
       )}
-      {cards.length === 0 && !isLoading ? (
-        <Empty heading="(┬┬﹏┬┬)" text="Здесь пока что пусто" />
-      ) : null}
     </section>
   );
 };

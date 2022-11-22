@@ -4,6 +4,7 @@
     'name duration'
     'cover cover'
     'btn btn';
+  grid-template-columns: 1fr auto;
   align-items: baseline;
   max-width: 360px;
 

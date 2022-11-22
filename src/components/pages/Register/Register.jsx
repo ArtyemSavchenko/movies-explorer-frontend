@@ -7,11 +7,10 @@ import FormBtn from '../../ui/FormBtn/FormBtn';
 import CustomLink from '../../ui/CustomLink/CustomLink';
 
 import { usePushNotification } from '../../shared/Notifications/Notifications';
+import { useValidationInput } from '../../../hook/useValidationInput';
 import { authorize, register } from '../../../utils/MainApi';
 
 import { CurrentUser } from '../../../contexts/CurrentUserContext';
-
-import { useValidationInput } from '../../../hook/useValidationInput';
 
 import './Register.css';
 

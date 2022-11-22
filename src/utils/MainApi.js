@@ -40,7 +40,7 @@ export const register = async (email, password, name) => {
 export const getUser = async () => {
   const res = await fetch(`${MAIN_BASE_URL}/users/me`, {
     headers: {
-      authorization: getToken(),
+      Authorization: getToken(),
     },
   });
 
@@ -52,7 +52,7 @@ export const patchUser = async (name, email) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': getToken(),
+      Authorization: getToken(),
     },
     body: JSON.stringify({
       name,
@@ -62,3 +62,51 @@ export const patchUser = async (name, email) => {
 
   return checkApiError(res);
 };
+
+export const likeMovie = async (movie) => {
+  console.log(movie);
+  console.log('movie', movie)
+  const res = await fetch(`${MAIN_BASE_URL}/movies`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: movie.image,
+      trailerLink: movie.trailerLink,
+      thumbnail: movie.thumbnail,
+      movieId: movie.movieId,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }),
+  });
+
+  return checkApiError(res);
+};
+
+export const dislikeMovie = async (movieId) => {
+  const res = await fetch(`${MAIN_BASE_URL}/movies/${movieId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+
+  return checkApiError(res);
+};
+
+export const getLikedMovies = async () => {
+  const res = await fetch(`${MAIN_BASE_URL}/movies`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+
+  return checkApiError(res);
+}
