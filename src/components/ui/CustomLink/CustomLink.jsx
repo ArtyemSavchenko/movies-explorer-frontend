@@ -10,6 +10,8 @@ const CustomLink = ({
   extraClass,
   feature = '',
   appearance = 'default',
+  isLoading = false,
+  disabled = false,
   ...restProps
 }) => {
   const addClassName = () => {
@@ -33,16 +35,27 @@ const CustomLink = ({
     return (
       <button
         className={`custom-link${addClassName()}`}
+        disabled={disabled || isLoading}
         {...restProps}
       >
-        {children}
+        {isLoading ? (
+          <div className="custom-link__spinner">
+            <div className="custom-link__spinner-el"></div>
+          </div>
+        ) : (
+          children
+        )}
       </button>
     );
   }
 
   if (feature === 'internal-link') {
     return (
-      <Link className={`custom-link${addClassName()} `} {...restProps}>
+      <Link
+        className={`custom-link${addClassName()} `}
+        disabled={disabled}
+        {...restProps}
+      >
         {children}
       </Link>
     );
@@ -54,6 +67,7 @@ const CustomLink = ({
         className={`custom-link${addClassName()}`}
         target="_blank"
         rel="noreferrer"
+        disabled={disabled}
         {...restProps}
       >
         {children}

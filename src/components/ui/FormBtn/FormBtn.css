@@ -21,7 +21,7 @@
   display: grid;
   place-content: center;
 
-  --spinner-el-size: 12px;
+  --spinner-el-size: .7em;
 }
 
 @media (any-hover: hover) {

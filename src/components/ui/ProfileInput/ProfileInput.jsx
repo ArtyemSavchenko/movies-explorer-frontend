@@ -2,7 +2,7 @@ import { useId } from 'react';
 
 import './ProfileInput.css';
 
-const ProfileInput = ({ label, extraClass = '', ...restProps }) => {
+const ProfileInput = ({ label, extraClass = '', error = '', ...restProps }) => {
   const id = useId();
 
   return (
@@ -11,6 +11,7 @@ const ProfileInput = ({ label, extraClass = '', ...restProps }) => {
       <label className="profile-input__label" htmlFor={id}>
         {label}
       </label>
+      <p className="profile-input__err">{error}</p>
     </div>
   );
 };

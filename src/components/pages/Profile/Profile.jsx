@@ -13,7 +13,6 @@ import { usePushNotification } from '../../shared/Notifications/Notifications';
 
 import './Profile.css';
 
-//TODO Сделать красивые ошибки валидации
 const Profile = () => {
   const { user, signIn, signOut } = useContext(CurrentUser);
 
@@ -37,6 +36,7 @@ const Profile = () => {
   const [isDataChanged, setIsDataChanged] = useState(false);
   const [isValidForm, setIsValidForm] = useState(true);
   const [isFirstEditing, setIsFirstEditing] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (nameIsValid && emailIsValid && isDataChanged) {
@@ -61,6 +61,7 @@ const Profile = () => {
   const handleEditProfile = async (e) => {
     e.preventDefault();
 
+    setIsSubmitting(true);
     try {
       const user = await patchUser(name, email);
 
@@ -79,6 +80,8 @@ const Profile = () => {
         type: 'error',
         text: err.message,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -102,6 +105,7 @@ const Profile = () => {
               required
               minLength="2"
               maxLength="30"
+              error={nameErr}
             />
             <ProfileInput
               extraClass="profile__input"
@@ -110,6 +114,7 @@ const Profile = () => {
               value={email}
               onChange={onChangeEmail}
               required
+              error={emailErr}
             />
 
             <p
@@ -121,20 +126,6 @@ const Profile = () => {
             >
               Новые данные совпадают со старыми
             </p>
-            <p
-              className={`profile__err-text${
-                !nameIsValid ? ' profile__err-text_visible' : ''
-              }`}
-            >
-              {nameErr}
-            </p>
-            <p
-              className={`profile__err-text${
-                !emailIsValid ? ' profile__err-text_visible' : ''
-              }`}
-            >
-              {emailErr}
-            </p>
           </fieldset>
 
           <CustomLink
@@ -142,6 +133,7 @@ const Profile = () => {
             feature="button"
             type="submit"
             disabled={!isValidForm}
+            isLoading={isSubmitting}
             onClick={handleEditProfile}
           >
             Редактировать

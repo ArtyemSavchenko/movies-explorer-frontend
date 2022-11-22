@@ -11,8 +11,8 @@ const FormBtn = ({
     <button
       type="submit"
       className={`form-btn ${extraClass}`}
-      {...restProps}
       disabled={disabled || isLoading}
+      {...restProps}
     >
       {isLoading ? (
         <div className="form-btn__spinner">
