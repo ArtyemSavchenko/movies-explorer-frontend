@@ -35,15 +35,15 @@ export const router = createBrowserRouter([
         path: 'profile',
         element: <ProtectedAuthRoute Component={Profile} />,
       },
+      {
+        path: 'signup',
+        element: <Register />,
+      },
+      {
+        path: 'signin',
+        element: <Login />,
+      },
     ],
-  },
-  {
-    path: 'signup',
-    element: <Register />,
-  },
-  {
-    path: 'signin',
-    element: <Login />,
   },
   {
     path: '*',

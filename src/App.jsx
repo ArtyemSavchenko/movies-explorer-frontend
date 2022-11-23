@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Preloader from './components/ui/Preloader/Preloader';
+import Notifications from './components/shared/Notifications/Notifications';
 
 import { CurrentUser } from './contexts/CurrentUserContext';
 import { getLikedMovies, getUser } from './utils/MainApi';
@@ -13,7 +14,29 @@ import './App.css';
 
 const App = () => {
   const [isCheckingToken, setIsCheckingToken] = useState(true);
-  const { signIn, setLikedCards } = useContext(CurrentUser);
+
+  const [user, setUser] = useState(null);
+  const [likedCards, setLikedCards] = useState([]);
+
+  const signIn = (user, callback) => {
+    setUser(user);
+
+    if (callback) {
+      setTimeout(callback, 0);
+    }
+  };
+
+  const signOut = (callback) => {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('last-result');
+    setUser(null);
+
+    if (callback) {
+      callback();
+    }
+  };
+
+  const providerValue = { user, signIn, signOut, likedCards, setLikedCards };
 
   useEffect(() => {
     const checkToken = async () => {
@@ -25,11 +48,12 @@ const App = () => {
 
       try {
         const user = await getUser();
-        if (user) {
-          signIn(user);
-          const likedMovies = await getLikedMovies();
-          setLikedCards(likedMovies);
-        }
+        signIn(user);
+
+        const likedMovies = await getLikedMovies();
+        setLikedCards(likedMovies);
+      } catch {
+        console.warn('Не удалось авторизоваться, токен недействителен.');
       } finally {
         setIsCheckingToken(false);
       }
@@ -41,13 +65,19 @@ const App = () => {
   return isCheckingToken ? (
     <Preloader />
   ) : (
-    <div className="app">
-      <Header />
-      <Main>
-        <Outlet />
-      </Main>
-      <Footer />
-    </div>
+    <Suspense fallback={<Preloader />}>
+      <CurrentUser.Provider value={providerValue}>
+        <Notifications delayClose={5000}>
+          <div className="app">
+            <Header />
+            <Main>
+              <Outlet />
+            </Main>
+            <Footer />
+          </div>
+        </Notifications>
+      </CurrentUser.Provider>
+    </Suspense>
   );
 };
 
