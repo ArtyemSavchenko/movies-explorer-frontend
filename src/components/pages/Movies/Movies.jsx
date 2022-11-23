@@ -5,7 +5,11 @@ import MoviesCardList from '../../MoviesCardList/MoviesCardList';
 import SearchMovieForm from '../../SearchMovieForm/SearchMovieForm';
 import Empty from '../../Empty/Empty';
 
-import { filterMovies } from '../../../utils/searchUtils';
+import {
+  filterByDuration,
+  filterBySearchString,
+  getNewPage,
+} from '../../../utils/searchUtils';
 import { usePushNotification } from '../../shared/Notifications/Notifications';
 import { MOVIE_COVER_URL } from '../../../utils/constants';
 
@@ -18,25 +22,75 @@ import './Movies.css';
 
 const Movies = () => {
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmptySearch, setIsEmptySearch] = useState(false);
-  const [isMoreResultBtnVisible, setIsMoreResultBtnVisible] = useState(false);
+  const [foundMovies, setFoundMovies] = useState(null);
+  const [filteredMovies, setFilteredMovies] = useState(null);
+
+  const [isMoreResultBtnVisible, setIsMoreResultBtnVisible] = useState(true);
+
   const [movieName, setMovieName] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);
+
+  const [isEmptySearch, setIsEmptySearch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { likedCards, setLikedCards, user } = useContext(CurrentUser);
 
   const pushNotification = usePushNotification();
 
-  const renderCards = (newCards) => {
-    if (newCards.length === 0) {
-      setIsEmptySearch(true);
-      setCards([]);
-    } else {
-      setIsEmptySearch(false);
-      setCards(injectLikes(newCards));
-    }
+  const injectLikes = (cards) => {
+    return cards.map(
+      (card) =>
+        likedCards.find((likedMovie) => card.movieId === likedMovie.movieId) ||
+        card
+    );
   };
+
+  const renderStartCards = () => {
+    if (filteredMovies.length === 0) {
+      setCards([]);
+      setIsEmptySearch(true);
+      setIsMoreResultBtnVisible(false);
+      return;
+    }
+
+    setIsEmptySearch(false);
+    const { newCards, isAllCards } = getNewPage([], filteredMovies);
+    setCards(injectLikes(newCards));
+    setIsMoreResultBtnVisible(!isAllCards);
+  };
+
+  const saveLastSearch = () => {
+    localStorage.setItem(
+      'last-result',
+      JSON.stringify({
+        movieName,
+        isShortMovies,
+        foundMovies,
+      })
+    );
+  };
+
+  const addCards = () => {
+    const { newCards, isAllCards } = getNewPage(cards, filteredMovies);
+
+    setCards((cards) => [...cards, ...injectLikes(newCards)]);
+    setIsMoreResultBtnVisible(!isAllCards);
+  };
+
+  useEffect(() => {
+    if (!foundMovies) {
+      return;
+    }
+    setFilteredMovies(filterByDuration(foundMovies, isShortMovies));
+    saveLastSearch();
+  }, [foundMovies, isShortMovies]);
+
+  useEffect(() => {
+    if (!filteredMovies) {
+      return;
+    }
+    renderStartCards(filteredMovies);
+  }, [filteredMovies]);
 
   const likeCard = async (card) => {
     try {
@@ -59,7 +113,6 @@ const Movies = () => {
       });
     }
   };
-
   const dislikeCard = async (card) => {
     try {
       await dislikeMovie(card._id);
@@ -83,18 +136,16 @@ const Movies = () => {
       });
     }
   };
-
   const handleLikeOrDislikeCard = async (card) => {
-    if (card.owner !== user._id) {
-      likeCard(card);
-    } else {
-      dislikeCard(card);
-    }
+    card.owner !== user._id ? likeCard(card) : dislikeCard(card);
   };
 
   const handleSearch = async () => {
-    setIsEmptySearch(false);
     setIsLoading(true);
+    setIsEmptySearch(false);
+    setFoundMovies(null);
+    setFilteredMovies(null);
+    setCards([]);
 
     try {
       const movies = await getMovies();
@@ -114,21 +165,7 @@ const Movies = () => {
         };
       });
 
-      const filteredMovies = filterMovies(formattedMovies, {
-        string: movieName,
-        isShortMovies: isShortMovies,
-      });
-
-      renderCards(filteredMovies);
-
-      localStorage.setItem(
-        'last-result',
-        JSON.stringify({
-          movieName,
-          isShortMovies,
-          filteredMovies,
-        })
-      );
+      setFoundMovies(filterBySearchString(formattedMovies, movieName));
     } catch (err) {
       pushNotification({
         type: 'error',
@@ -145,21 +182,13 @@ const Movies = () => {
       return;
     }
 
-    const { movieName, isShortMovies, filteredMovies } =
+    const { movieName, isShortMovies, foundMovies } =
       JSON.parse(lastResultString);
 
     setMovieName(movieName);
     setIsShortMovies(isShortMovies);
-
-    renderCards(filteredMovies);
+    setFoundMovies(foundMovies);
   }, []);
-
-  const injectLikes = (cards) => {
-    return cards.map(
-      (card) =>
-        likedCards.find((likedMovie) => card.movieId === likedMovie.movieId) || card
-    );
-  };
 
   return (
     <section className="movies">
@@ -184,6 +213,7 @@ const Movies = () => {
           isMoreResultBtnVisible ? ' movies__more-btn_visible' : ''
         }`}
         type="button"
+        onClick={addCards}
       >
         Ещё
       </button>

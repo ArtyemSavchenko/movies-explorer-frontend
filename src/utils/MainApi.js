@@ -64,8 +64,6 @@ export const patchUser = async (name, email) => {
 };
 
 export const likeMovie = async (movie) => {
-  console.log(movie);
-  console.log('movie', movie)
   const res = await fetch(`${MAIN_BASE_URL}/movies`, {
     method: 'POST',
     headers: {

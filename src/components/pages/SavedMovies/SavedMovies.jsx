@@ -22,7 +22,7 @@ const SavedMovies = () => {
   const pushNotification = usePushNotification();
 
   const handleSearch = () => {
-    setCards(filterMovies(likedCards, { string: movieName, isShortMovies }));
+    // setCards(filterMovies(likedCards, { string: movieName, isShortMovies }));
   };
 
   const handleDeleteCard = async (card) => {
