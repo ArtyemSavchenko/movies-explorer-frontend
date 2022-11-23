@@ -95,7 +95,7 @@ const Profile = () => {
         <p className="profile__heading">Привет, {user.name}!</p>
 
         <form className="profile__form">
-          <fieldset className="profile__fieldset">
+          <fieldset className="profile__fieldset" disabled={isSubmitting}>
             <ProfileInput
               extraClass="profile__input"
               label="Имя"

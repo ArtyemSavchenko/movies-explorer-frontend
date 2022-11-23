@@ -70,7 +70,7 @@ const Login = () => {
       <LogoLink extraClass="login__logo-link" funny />
       <p className="login__title">Рады видеть!</p>
       <form className="login__form" onSubmit={handleLogin}>
-        <fieldset className="login__fieldset">
+        <fieldset className="login__fieldset" disabled={isSubmitting}>
           <FormInput
             extraClass="login__input"
             type="email"

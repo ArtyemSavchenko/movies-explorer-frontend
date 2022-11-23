@@ -79,7 +79,7 @@ const Register = () => {
       <LogoLink extraClass="register__logo-link" funny />
       <p className="register__title">Добро пожаловать!</p>
       <form className="register__form" onSubmit={handleRegister} noValidate>
-        <fieldset className="register__fieldset">
+        <fieldset className="register__fieldset" disabled={isSubmitting}>
           <FormInput
             extraClass="register__input"
             type="text"
@@ -109,8 +109,8 @@ const Register = () => {
             autoComplete="new-password"
             value={password}
             onChange={onChangePassword}
-            required
             error={passwordErr}
+            required
           />
         </fieldset>
         <FormBtn
