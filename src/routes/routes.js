@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '../App';
 import ProtectedAuthRoute from '../components/ProtectedAuthRoute/ProtectedAuthRoute';
+import ProtectedNotAuthRoute from '../components/ProtectedNotAuthRoute/ProtectedNotAuthRoute';
 
 const Landing = lazy(() => import('../components/pages/Landing/Landing'));
 const NotFound = lazy(() => import('../components/pages/NotFound/NotFound'));
@@ -37,11 +38,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <Register />,
+        element: <ProtectedNotAuthRoute Component={Register} />,
       },
       {
         path: 'signin',
-        element: <Login />,
+        element: <ProtectedNotAuthRoute Component={Login} />,
       },
     ],
   },
