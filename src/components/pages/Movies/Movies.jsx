@@ -32,6 +32,7 @@ const Movies = () => {
 
   const [isEmptySearch, setIsEmptySearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  // const [isLikeRequest, setIsLikeRequest] = useState(false);
 
   const { likedCards, setLikedCards, user } = useContext(CurrentUser);
 
@@ -137,7 +138,7 @@ const Movies = () => {
     }
   };
   const handleLikeOrDislikeCard = async (card) => {
-    card.owner !== user._id ? likeCard(card) : dislikeCard(card);
+    card.owner !== user._id ? await likeCard(card) : await dislikeCard(card);
   };
 
   const handleSearch = async () => {

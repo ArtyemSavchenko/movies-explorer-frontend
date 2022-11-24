@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import LikeBtn from '../ui/LikeBtn/LikeBtn';
@@ -12,6 +12,8 @@ import './MovieCard.css';
 const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
   const location = useLocation();
   const { user } = useContext(CurrentUser);
+
+  const [isLikeRequest, setIsLikeRequest] = useState(false);
 
   const convertDuration = (durationNumber) => {
     const lastTwoDigits = durationNumber % 100;
@@ -31,8 +33,10 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
     }
   };
 
-  const handleLikeClick = () => {
-    cbBtnClick(card);
+  const handleLikeClick = async () => {
+    setIsLikeRequest(true);
+    await cbBtnClick(card);
+    setIsLikeRequest(false);
   };
 
   return (
@@ -48,7 +52,11 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
       >
         <img
           className="movie-card__cover"
-          src={typeof card.image === 'string' ? card.image : `${MOVIE_COVER_URL}${card.image.url}`}
+          src={
+            typeof card.image === 'string'
+              ? card.image
+              : `${MOVIE_COVER_URL}${card.image.url}`
+          }
           alt="Постер фильма."
         />
       </a>
@@ -59,6 +67,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
           type="button"
           isLiked={card.owner === user._id}
           onClick={handleLikeClick}
+          disabled={isLikeRequest}
         >
           Сохранить
         </LikeBtn>
@@ -68,6 +77,7 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
           type="button"
           aria-label="Удалить фильм из сохраненных."
           onClick={handleLikeClick}
+          disabled={isLikeRequest}
         />
       )}
     </article>
