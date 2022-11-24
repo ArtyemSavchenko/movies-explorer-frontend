@@ -18,11 +18,11 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [likedCards, setLikedCards] = useState([]);
 
-  const signIn = (user, callback) => {
+  const signIn = async (user, callback) => {
     setUser(user);
 
     if (callback) {
-      setTimeout(callback, 0);
+      callback();
     }
   };
 
@@ -30,6 +30,7 @@ const App = () => {
     localStorage.removeItem('jwt');
     localStorage.removeItem('last-result');
     setUser(null);
+    setLikedCards([]);
 
     if (callback) {
       callback();
