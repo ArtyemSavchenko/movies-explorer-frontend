@@ -18,6 +18,10 @@ export const filterBySearchString = (movies, searchString) => {
 };
 
 export const filterByDuration = (movies, isShortMovies) => {
+  if (isShortMovies === null || isShortMovies === undefined) {
+    return movies;
+  }
+  
   return movies.filter((movie) => {
     if (
       !(isShortMovies && movie.duration <= SHORT_MOVIE_DURATION) &&
@@ -34,7 +38,7 @@ export const getNewPage = (renderedCards, allCards) => {
   if (!renderedCards) {
     renderedCards = [];
   }
-  
+
   const docWidth = window.innerWidth;
   const lineWidth = docWidth >= 1280 ? 3 : 2;
 

@@ -25,9 +25,9 @@ const Movies = () => {
   const [foundMovies, setFoundMovies] = useState(null);
   const [filteredMovies, setFilteredMovies] = useState(null);
 
-  const [isMoreResultBtnVisible, setIsMoreResultBtnVisible] = useState(true);
+  const [isMoreResultBtnVisible, setIsMoreResultBtnVisible] = useState(false);
 
-  const [movieName, setMovieName] = useState('');
+  const [searchString, setSearchString] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);
 
   const [isEmptySearch, setIsEmptySearch] = useState(false);
@@ -63,14 +63,14 @@ const Movies = () => {
     localStorage.setItem(
       'last-result',
       JSON.stringify({
-        movieName,
+        searchString,
         isShortMovies,
         foundMovies,
       })
     );
   };
 
-  const addCards = () => {
+  const addCardsPage = () => {
     const { newCards, isAllCards } = getNewPage(cards, filteredMovies);
 
     setCards((cards) => [...cards, ...injectLikes(newCards)]);
@@ -165,7 +165,7 @@ const Movies = () => {
         };
       });
 
-      setFoundMovies(filterBySearchString(formattedMovies, movieName));
+      setFoundMovies(filterBySearchString(formattedMovies, searchString));
     } catch (err) {
       pushNotification({
         type: 'error',
@@ -182,10 +182,10 @@ const Movies = () => {
       return;
     }
 
-    const { movieName, isShortMovies, foundMovies } =
+    const { searchString, isShortMovies, foundMovies } =
       JSON.parse(lastResultString);
 
-    setMovieName(movieName);
+    setSearchString(searchString);
     setIsShortMovies(isShortMovies);
     setFoundMovies(foundMovies);
   }, []);
@@ -195,8 +195,8 @@ const Movies = () => {
       <SearchMovieForm
         extraClass="movies__search-form"
         onSubmit={handleSearch}
-        movieName={movieName}
-        setMovieName={setMovieName}
+        searchString={searchString}
+        setSearchString={setSearchString}
         isShortMovies={isShortMovies}
         setIsShortMovies={setIsShortMovies}
       />
@@ -213,7 +213,7 @@ const Movies = () => {
           isMoreResultBtnVisible ? ' movies__more-btn_visible' : ''
         }`}
         type="button"
-        onClick={addCards}
+        onClick={addCardsPage}
       >
         Ещё
       </button>

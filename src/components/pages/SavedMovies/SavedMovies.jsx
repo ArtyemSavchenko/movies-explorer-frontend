@@ -7,7 +7,10 @@ import Empty from '../../Empty/Empty';
 import { usePushNotification } from '../../../components/shared/Notifications/Notifications';
 import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
-import { filterMovies } from '../../../utils/searchUtils';
+import {
+  filterByDuration,
+  filterBySearchString,
+} from '../../../utils/searchUtils';
 import { dislikeMovie } from '../../../utils/MainApi';
 
 import './SavedMovies.css';
@@ -16,13 +19,20 @@ const SavedMovies = () => {
   const { likedCards, setLikedCards } = useContext(CurrentUser);
 
   const [cards, setCards] = useState(likedCards);
-  const [movieName, setMovieName] = useState('');
+  const [searchString, setSearchString] = useState('');
   const [isShortMovies, setIsShortMovies] = useState(false);
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
 
   const pushNotification = usePushNotification();
 
   const handleSearch = () => {
-    // setCards(filterMovies(likedCards, { string: movieName, isShortMovies }));
+    setCards(
+      filterBySearchString(
+        filterByDuration(likedCards, isShortMovies),
+        searchString
+      )
+    );
+    setIsFirstSearch(false);
   };
 
   const handleDeleteCard = async (card) => {
@@ -40,16 +50,25 @@ const SavedMovies = () => {
   };
 
   useEffect(() => {
-    handleSearch();
-  }, [likedCards]);
+    if (isFirstSearch) {
+      setCards(likedCards);
+    } else {
+      setCards(
+        filterBySearchString(
+          filterByDuration(likedCards, isShortMovies),
+          searchString
+        )
+      );
+    }
+  }, [isShortMovies, likedCards]);
 
   return (
     <section className="saved-movies">
       <SearchMovieForm
         extraClass="saved-movies__search-form"
         onSubmit={handleSearch}
-        movieName={movieName}
-        setMovieName={setMovieName}
+        searchString={searchString}
+        setSearchString={setSearchString}
         isShortMovies={isShortMovies}
         setIsShortMovies={setIsShortMovies}
       />

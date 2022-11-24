@@ -9,8 +9,8 @@ const SearchMovieForm = ({
   onSubmit,
   isShortMovies,
   setIsShortMovies,
-  movieName,
-  setMovieName,
+  searchString,
+  setSearchString,
   ...restProps
 }) => {
   const [searchErr, setSearchErr] = useState('');
@@ -18,7 +18,7 @@ const SearchMovieForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!movieName) {
+    if (!searchString) {
       setSearchErr('Нужно ввести ключевое слово');
       return;
     }
@@ -28,7 +28,7 @@ const SearchMovieForm = ({
 
   const inputMovieName = (e) => {
     setSearchErr('');
-    setMovieName(e.target.value);
+    setSearchString(e.target.value);
   };
 
   return (
@@ -41,7 +41,7 @@ const SearchMovieForm = ({
       <div className="search-movie-form__search-box">
         <input
           className="search-movie-form__input"
-          value={movieName}
+          value={searchString}
           onChange={inputMovieName}
           type="text"
           placeholder="Фильм"
