@@ -53,8 +53,8 @@ const App = () => {
 
         const likedMovies = await getLikedMovies();
         setLikedCards(likedMovies);
-      } catch {
-        console.warn('Не удалось авторизоваться, токен недействителен.');
+      } catch(err) {
+        console.error(err.message);
       } finally {
         setIsCheckingToken(false);
       }

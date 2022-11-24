@@ -9,7 +9,7 @@ import CustomLink from '../../ui/CustomLink/CustomLink';
 import { CurrentUser } from '../../../contexts/CurrentUserContext';
 
 import { usePushNotification } from '../../shared/Notifications/Notifications';
-import { authorize, getUser } from '../../../utils/MainApi';
+import { authorize, getLikedMovies, getUser } from '../../../utils/MainApi';
 
 import { useValidationInput } from '../../../hook/useValidationInput';
 
@@ -39,7 +39,7 @@ const Login = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { signIn } = useContext(CurrentUser);
+  const { signIn, setLikedCards } = useContext(CurrentUser);
   const navigate = useNavigate();
   const pushNotification = usePushNotification();
 
@@ -55,6 +55,9 @@ const Login = () => {
       signIn(user, () => {
         navigate('/movies');
       });
+
+      const likedMovies = await getLikedMovies();
+      setLikedCards(likedMovies);
     } catch (err) {
       pushNotification({
         type: 'error',
