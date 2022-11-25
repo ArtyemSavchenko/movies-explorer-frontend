@@ -6,3 +6,19 @@ export const EMAIL_REG_EXP = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66}
 export const NAME_REG_EXP = /^[a-zа-я\s-]+$/i;
 
 export const SHORT_MOVIE_DURATION = 40;
+
+export const COLORS = [
+  'cornflowerblue',
+  'lightseagreen',
+  'peru',
+  'sandybrown',
+  'tomato',
+  'coral',
+  'hotpink',
+  'salmon',
+  'steelblue',
+  'teal',
+  'darkcyan',
+  'mediumpurple',
+  'indianred',
+];

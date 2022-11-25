@@ -5,7 +5,7 @@ import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Preloader from './components/ui/Preloader/Preloader';
-import Notifications from './components/shared/Notifications/Notifications';
+import { usePushNotification } from './components/shared/Notifications/Notifications';
 
 import { CurrentUser } from './contexts/CurrentUserContext';
 import { getLikedMovies, getUser } from './utils/MainApi';
@@ -14,6 +14,7 @@ import './App.css';
 
 const App = () => {
   const [isCheckingToken, setIsCheckingToken] = useState(true);
+  const pushNotification = usePushNotification();
 
   const [user, setUser] = useState(null);
   const [likedCards, setLikedCards] = useState([]);
@@ -50,11 +51,26 @@ const App = () => {
       try {
         const user = await getUser();
         signIn(user);
+      } catch (err) {
+        pushNotification({
+          type: 'error',
+          heading: 'Не удалось авторизоваться',
+          text: 'Токен недействителен',
+        });
+        
+        return;
+      } finally {
+        setIsCheckingToken(false);
+      }
 
+      try {
         const likedMovies = await getLikedMovies();
         setLikedCards(likedMovies);
-      } catch(err) {
-        console.error(err.message);
+      } catch (err) {
+        pushNotification({
+          type: 'error',
+          text: err.message,
+        });
       } finally {
         setIsCheckingToken(false);
       }
@@ -68,15 +84,13 @@ const App = () => {
   ) : (
     <Suspense fallback={<Preloader />}>
       <CurrentUser.Provider value={providerValue}>
-        <Notifications delayClose={5000}>
-          <div className="app">
-            <Header />
-            <Main>
-              <Outlet />
-            </Main>
-            <Footer />
-          </div>
-        </Notifications>
+        <div className="app">
+          <Header />
+          <Main>
+            <Outlet />
+          </Main>
+          <Footer />
+        </div>
       </CurrentUser.Provider>
     </Suspense>
   );

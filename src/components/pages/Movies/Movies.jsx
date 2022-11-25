@@ -32,7 +32,6 @@ const Movies = () => {
 
   const [isEmptySearch, setIsEmptySearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isLikeRequest, setIsLikeRequest] = useState(false);
 
   const { likedCards, setLikedCards, user } = useContext(CurrentUser);
 
@@ -147,6 +146,7 @@ const Movies = () => {
     setFoundMovies(null);
     setFilteredMovies(null);
     setCards([]);
+    setIsMoreResultBtnVisible(false);
 
     try {
       const movies = await getMovies();
