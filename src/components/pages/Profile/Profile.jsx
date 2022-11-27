@@ -4,80 +4,127 @@ import { useNavigate } from 'react-router-dom';
 import CustomLink from '../../ui/CustomLink/CustomLink';
 import ProfileInput from '../../ui/ProfileInput/ProfileInput';
 
-import { CurrentUserInfo } from '../../../contexts/CurrentUserContext';
+import { CurrentUser } from '../../../contexts/CurrentUserContext';
+
+import { useValidationInput } from '../../../hook/useValidationInput';
+import { usePushNotification } from '../../shared/Notifications/Notifications';
+
+import { patchUser } from '../../../utils/MainApi';
 
 import './Profile.css';
 
 const Profile = () => {
-  const currentUser = useContext(CurrentUserInfo);
+  const { user, signIn, signOut } = useContext(CurrentUser);
 
-  const [name, setName] = useState(currentUser.name);
-  const [email, setEmail] = useState(currentUser.email);
+  const [name, nameErr, nameIsValid, onChangeName] = useValidationInput(
+    user.name,
+    {
+      required: true,
+      isName: true,
+      minLength: 2,
+      maxLength: 30,
+    }
+  );
+  const [email, emailErr, emailIsValid, onChangeEmail] = useValidationInput(
+    user.email,
+    {
+      required: true,
+      isEmail: true,
+    }
+  );
 
-  const [isDirty, setIsDirty] = useState(false);
-  const [firstEditing, setFirstEditing] = useState(true);
-
-  const navigate = useNavigate();
+  const [isDataChanged, setIsDataChanged] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(true);
+  const [isFirstEditing, setIsFirstEditing] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (name === currentUser.name && email === currentUser.email) {
-      setIsDirty(true);
+    if (nameIsValid && emailIsValid && isDataChanged) {
+      setIsValidForm(true);
     } else {
-      setIsDirty(false);
-      setFirstEditing(false);
+      setIsValidForm(false);
     }
-  }, [name, email, currentUser]);
+  }, [nameIsValid, emailIsValid, isDataChanged]);
+
+  useEffect(() => {
+    if (name !== user.name || email !== user.email) {
+      setIsFirstEditing(false);
+      setIsDataChanged(true);
+    } else {
+      setIsDataChanged(false);
+    }
+  }, [name, email, user]);
+
+  const navigate = useNavigate();
+  const pushNotification = usePushNotification();
+
+  const handleEditProfile = async (e) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+    try {
+      const user = await patchUser(name, email);
+
+      if (user) {
+        setIsFirstEditing(true);
+
+        signIn(user);
+        pushNotification({
+          type: 'success',
+          heading: '(〃￣︶￣)人(￣︶￣〃)',
+          text: 'Данные успешно обновлены',
+        });
+      }
+    } catch (err) {
+      pushNotification({
+        type: 'error',
+        text: err.message,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleSignOut = () => {
-    navigate('/');
+    signOut(navigate('/'));
   };
 
   return (
     <section className="profile">
       <div className="profile__content">
-        <p className="profile__heading">Привет, {currentUser.name}!</p>
+        <p className="profile__heading">Привет, {user.name}!</p>
 
         <form className="profile__form">
-          <fieldset className="profile__fieldset">
+          <fieldset className="profile__fieldset" disabled={isSubmitting}>
             <ProfileInput
               extraClass="profile__input"
               label="Имя"
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={onChangeName}
               required
               minLength="2"
               maxLength="30"
+              error={nameErr}
             />
             <ProfileInput
               extraClass="profile__input"
               label="E-mail"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={onChangeEmail}
               required
+              error={emailErr}
             />
 
             <p
               className={`profile__err-text${
-                isDirty && !firstEditing ? ' profile__err-text_visible' : ''
+                !isDataChanged && !isFirstEditing
+                  ? ' profile__err-text_visible'
+                  : ''
               }`}
             >
               Новые данные совпадают со старыми
-            </p>
-            <p
-              className={`profile__err-text${
-                false ? ' profile__err-text_visible' : ''
-              }`}
-            >
-              {'ошибки имени'}
-            </p>
-            <p
-              className={`profile__err-text${
-                false ? ' profile__err-text_visible' : ''
-              }`}
-            >
-              {'ошибки почты'}
             </p>
           </fieldset>
 
@@ -85,7 +132,9 @@ const Profile = () => {
             extraClass="profile__submit-btn"
             feature="button"
             type="submit"
-            disabled={isDirty}
+            disabled={!isValidForm}
+            isLoading={isSubmitting}
+            onClick={handleEditProfile}
           >
             Редактировать
           </CustomLink>

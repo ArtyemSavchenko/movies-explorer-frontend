@@ -7,7 +7,7 @@ const MoviesCardList = ({ cards, cbBtnClick }) => {
   return (
     <ul className="movies-card-list">
       {cards.map((card) => (
-        <li key={card.id}>
+        <li key={card.id || card.movieId}>
           <MovieCard
             card={card}
             cbBtnClick={cbBtnClick}

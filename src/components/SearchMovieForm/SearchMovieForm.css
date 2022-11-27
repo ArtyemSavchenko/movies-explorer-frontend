@@ -7,7 +7,6 @@
 .search-movie-form__search-box {
   position: relative;
   align-self: stretch;
-  margin-bottom: 43px;
 }
 
 .search-movie-form__input {
@@ -56,6 +55,15 @@
   .search-movie-form__submit-btn:hover {
     opacity: 0.8;
   }
+}
+
+.search-movie-form__err {
+  font-size: 11px;
+  line-height: 1.36;
+  margin: 3px auto 25px 20px;
+  align-self: start;
+  min-height: 15px;
+  color: var(--attention-color);
 }
 
 .search-movie-form__short-movies {

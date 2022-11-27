@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import SignMenu from './SignMenu/SignMenu';
 import NavBar from './NavBar/NavBar';
 import LogoLink from '../ui/LogoLink/LogoLink';
 
+import { CurrentUser } from '../../contexts/CurrentUserContext';
+
 import './Header.css';
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
+  const { user } = useContext(CurrentUser);
   const location = useLocation();
 
   const [isLanding, setIsLanding] = useState(true);
@@ -20,10 +23,14 @@ const Header = ({ isLoggedIn }) => {
     }
   }, [location]);
 
+  if (location.pathname === '/signin' || location.pathname === '/signup') {
+    return null;
+  }
+
   return (
     <header className={`header${isLanding ? ' header_landing' : ''}`}>
       <LogoLink funny />
-      {isLoggedIn ? <NavBar /> : <SignMenu />}
+      {user ? <NavBar /> : <SignMenu />}
     </header>
   );
 };

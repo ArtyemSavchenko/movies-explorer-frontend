@@ -1,22 +1,8 @@
 import { useState } from 'react';
 
-import './Logo.css';
+import { COLORS } from '../../../utils/constants';
 
-const COLORS = [
-  'cornflowerblue',
-  'lightseagreen',
-  'peru',
-  'sandybrown',
-  'tomato',
-  'coral',
-  'hotpink',
-  'salmon',
-  'steelblue',
-  'teal',
-  'darkcyan',
-  'mediumpurple',
-  'indianred',
-];
+import './Logo.css';
 
 const Logo = ({ extraClass = '', funny = false }) => {
   const [fill, setFill] = useState('');
