@@ -44,6 +44,7 @@ const App = () => {
     const checkToken = async () => {
       const token = localStorage.getItem('jwt');
       if (!token) {
+        localStorage.removeItem('last-result');
         setIsCheckingToken(false);
         return;
       }
@@ -58,9 +59,11 @@ const App = () => {
           text: 'Токен недействителен',
         });
         
-        return;
-      } finally {
+        localStorage.removeItem('last-result');
+        localStorage.removeItem('jwt');
+
         setIsCheckingToken(false);
+        return;
       }
 
       try {
