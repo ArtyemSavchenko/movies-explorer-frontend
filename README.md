@@ -1,7 +1,13 @@
 # movies-explorer-frontend
+SPA для работы с открытым API, который возвращает 100 арт-хаус фильмов. Мы можем искать фильмы по ключевым словам и сохранять понравившиеся. Для этого реализован свой API <a href="https://github.com/ArtyemSavchenko/movies-explorer-api" target="_blank">`movies-explorer-api`</a>
 
-[Ссылка на макет фигмы](https://disk.yandex.ru/d/i6JPzywA4vZMeA)
+Из интересного:
+* используется `React.lazy`,
+* все подгрузки и запросы к API сопровождаются приятными анимациями,
+* реализован компонент для показа всплывающих уведомлений,
+* реализована валидация форм через `кастомный хук`,
+* роутинг реализован с помощью `React Router 6` и `createBrowserRouter`,
+* семантическая верстка.
 
-[Ссылка на пул реквест level-3](https://github.com/ArtyemSavchenko/movies-explorer-frontend/pull/2)
-
-Ссылка на проект: [`https://movie.nomoredomains.icu/`](https://movie.nomoredomains.icu/)
+Ссылка на SPA: [`https://movie.nomoredomains.icu/`](https://movie.nomoredomains.icu/)
+(сервер оплачен до февраля 2023 года)
