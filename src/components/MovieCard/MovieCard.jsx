@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import LikeBtn from '../ui/LikeBtn/LikeBtn';
 
-import { MOVIE_COVER_URL } from '../../utils/constants';
-
 import { CurrentUser } from '../../contexts/CurrentUserContext';
+
+import { convertDuration } from '../../utils/convertDuration';
+import { MOVIE_COVER_URL } from '../../utils/constants';
 
 import './MovieCard.css';
 
@@ -15,34 +16,18 @@ const MovieCard = ({ extraClass = '', card, cbBtnClick }) => {
 
   const [isLikeRequest, setIsLikeRequest] = useState(false);
 
-  const convertDuration = (durationNumber) => {
-    const lastTwoDigits = durationNumber % 100;
-
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-      return (durationNumber += ' минут');
-    } else {
-      const lastDigit = durationNumber % 10;
-
-      if (lastDigit === 1) {
-        return (durationNumber += ' минута');
-      }
-      if (lastDigit === 2 || lastDigit === 3 || lastDigit === 4) {
-        return (durationNumber += ' минуты');
-      }
-      return (durationNumber += ' минут');
-    }
-  };
-
   const handleLikeClick = async () => {
     setIsLikeRequest(true);
     await cbBtnClick(card);
     setIsLikeRequest(false);
   };
 
+  const convertedDuration = useMemo(() => convertDuration(card.duration), [card.duration]);
+
   return (
     <article className={`movie-card ${extraClass}`}>
       <h2 className="movie-card__name">{card.nameRU}</h2>
-      <p className="movie-card__duration">{convertDuration(card.duration)}</p>
+      <p className="movie-card__duration">{convertedDuration}</p>
       <a
         className="movie-card__trailer-link"
         href={card.trailerLink}
