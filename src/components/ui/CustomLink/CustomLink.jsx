@@ -31,50 +31,53 @@ const CustomLink = ({
     return resultClasses;
   };
 
-  if (feature === 'button') {
-    return (
-      <button
-        className={`custom-link${addClassName()}`}
-        disabled={disabled || isLoading}
-        {...restProps}
-      >
-        {isLoading ? (
-          <div className="custom-link__spinner">
-            <div className="custom-link__spinner-el"></div>
-          </div>
-        ) : (
-          children
-        )}
-      </button>
-    );
-  }
+  switch (feature) {
+    case 'button':
+      return (
+        <button
+          className={`custom-link${addClassName()}`}
+          disabled={disabled || isLoading}
+          {...restProps}
+        >
+          {isLoading ? (
+            <div className="custom-link__spinner">
+              <div className="custom-link__spinner-el"></div>
+            </div>
+          ) : (
+            children
+          )}
+        </button>
+      );
 
-  if (feature === 'internal-link') {
-    return (
-      <Link
-        className={`custom-link${addClassName()} `}
-        disabled={disabled}
-        {...restProps}
-      >
-        {children}
-      </Link>
-    );
-  }
+    case 'internal-link':
+      return (
+        <Link
+          className={`custom-link${addClassName()} `}
+          disabled={disabled}
+          {...restProps}
+        >
+          {children}
+        </Link>
+      );
 
-  if (feature === 'external-link') {
-    return (
-      <a
-        className={`custom-link${addClassName()}`}
-        target="_blank"
-        rel="noreferrer"
-        disabled={disabled}
-        {...restProps}
-      >
-        {children}
-      </a>
-    );
+    case 'external-link':
+      return (
+        <a
+          className={`custom-link${addClassName()}`}
+          target="_blank"
+          rel="noreferrer"
+          disabled={disabled}
+          {...restProps}
+        >
+          {children}
+        </a>
+      );
+      
+    default:
+      console.error(
+        `TypeError: unknown feature '${feature}' of CustomLink.\nAllowed options:\n  button - <button>,\n  internal-link - <Link>,\n  external-link - <a>`
+      );
+      return 'see console';
   }
-
-  return 'Unknown type';
 };
 export default CustomLink;
