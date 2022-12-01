@@ -19,12 +19,15 @@
 
 #root {
   display: grid;
-  font-family: var(--main-font);
   color: var(--base-text-color);
 
   background-color: var(--dark-bg-color);
 
   min-height: 100vh;
+}
+
+body {
+  font-family: var(--main-font);
 }
 
 * {

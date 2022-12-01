@@ -58,7 +58,7 @@ const App = () => {
           heading: 'Не удалось авторизоваться',
           text: 'Токен недействителен',
         });
-        
+
         localStorage.removeItem('last-result');
         localStorage.removeItem('jwt');
 

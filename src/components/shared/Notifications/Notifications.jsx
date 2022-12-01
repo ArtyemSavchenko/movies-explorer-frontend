@@ -1,31 +1,38 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 
 import styles from './Notifications.module.css';
 
 const NotificationsContext = createContext();
 
+let actualId = 0;
+const generateId = () => {
+  return actualId++;
+};
+
 const Notification = ({ id, type, heading, text, onClose, delayClose }) => {
   const [state, setState] = useState('');
 
-  const closeNotification = () => {
+  const closeNotification = useCallback(() => {
     setState('close');
     setTimeout(() => {
       onClose(id);
     }, 1500);
-  };
-
-  const handlerBtnCloseClick = () => {
-    closeNotification();
-  };
+  }, [id, onClose]);
 
   useEffect(() => {
-    setState('open');
     if (delayClose > 0) {
       setTimeout(() => {
         closeNotification();
       }, delayClose);
     }
-  }, []);
+  }, [delayClose, closeNotification]);
 
   return (
     <div
@@ -43,57 +50,65 @@ const Notification = ({ id, type, heading, text, onClose, delayClose }) => {
       <button
         type="button"
         className={styles.notification__btnClose}
-        onClick={handlerBtnCloseClick}
+        onClick={closeNotification}
         aria-label="Закрыть уведомление."
       />
     </div>
   );
 };
 
-const Notifications = ({ delayClose, children }) => {
+const Notifications = ({
+  delayClose = null,
+  notifications,
+  closeNotification,
+}) => {
+  return createPortal(
+    <div className={styles.notifications}>
+      {notifications.map((item) => (
+        <Notification
+          {...item}
+          key={item.id}
+          onClose={closeNotification}
+          delayClose={Boolean(item.delayClose) ? item.delayClose : delayClose}
+        />
+      ))}
+    </div>,
+    document.body
+  );
+};
+
+const NotificationsProvider = ({ children, delayClose = null }) => {
   const [notifications, setNotifications] = useState([]);
 
-  const pushNotification = (notification, delayClose = null) => {
-    const date = new Date();
-    const newId = date.getSeconds() + date.getMilliseconds() + Math.random();
+  const pushNotification = useCallback((notification, delayClose = null) => {
+    const newId = generateId();
     const newNotification = {
       ...notification,
       id: newId,
     };
+
     if (delayClose !== null) {
       newNotification.delayClose = delayClose;
     }
-    setNotifications((notifications) => [newNotification, ...notifications]);
-    return newId;
-  };
 
-  const closeNotification = (id) => {
+    setNotifications((notifications) => [newNotification, ...notifications]);
+
+    return newId;
+  }, []);
+
+  const closeNotification = useCallback((id) => {
     setNotifications((notifications) =>
-      notifications.reduce((prev, not) => {
-        if (not.id !== id) {
-          prev.push(not);
-        }
-        return prev;
-      }, [])
+      notifications.filter((notification) => notification.id !== id)
     );
-  };
+  }, []);
 
   return (
     <NotificationsContext.Provider value={pushNotification}>
-      <div className={styles.notifications}>
-        {notifications.map((item) => (
-          <Notification
-            {...item}
-            key={item.id}
-            onClose={closeNotification}
-            delayClose={
-              item.delayClose || item.delayClose === 0
-                ? item.delayClose
-                : delayClose
-            }
-          />
-        ))}
-      </div>
+      <Notifications
+        notifications={notifications}
+        closeNotification={closeNotification}
+        delayClose={delayClose}
+      />
       {children}
     </NotificationsContext.Provider>
   );
@@ -103,4 +118,4 @@ export const usePushNotification = () => {
   return useContext(NotificationsContext);
 };
 
-export default Notifications;
+export default NotificationsProvider;

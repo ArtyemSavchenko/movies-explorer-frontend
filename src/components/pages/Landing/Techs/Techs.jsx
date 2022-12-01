@@ -2,8 +2,6 @@ import HeadingUnderlined from '../HeadingUnderlined/HeadingUnderlined';
 import BaseText from '../BaseText/BaseText';
 import Tech from '../Tech/Tech';
 
-import { generateId } from '../../../../utils/generateId';
-
 import './Techs.css';
 
 const TECHS = ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'MongoDB'];
@@ -20,7 +18,7 @@ const Techs = () => {
 
       <div className="techs__techs-box">
         {TECHS.map((tech) => (
-          <Tech key={generateId()}>{tech}</Tech>
+          <Tech key={tech}>{tech}</Tech>
         ))}
       </div>
     </section>

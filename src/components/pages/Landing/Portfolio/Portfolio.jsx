@@ -1,5 +1,3 @@
-import { generateId } from '../../../../utils/generateId';
-
 import PortfolioLink from '../PortfolioLink/PortfolioLink';
 
 import './Portfolio.css';
@@ -25,7 +23,7 @@ const Portfolio = () => {
       <h2 className="portfolio__heading">Портфолио</h2>
       <ul className="portfolio__list">
         {LINKS.map((item) => (
-          <li key={generateId()}>
+          <li key={item.link}>
             <PortfolioLink href={item.link} target="_blank">
               {item.name}
             </PortfolioLink>

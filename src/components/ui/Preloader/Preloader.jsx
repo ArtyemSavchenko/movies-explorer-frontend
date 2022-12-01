@@ -22,7 +22,7 @@ const Preloader = () => {
         <span
           className="preloader__round"
           style={fill ? { '--ui-accent-color': fill } : null}
-        ></span>
+        />
       </div>
     </div>
   );

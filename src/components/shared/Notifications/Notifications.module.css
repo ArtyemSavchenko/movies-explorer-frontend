@@ -1,3 +1,33 @@
+@keyframes open-animation {
+  from {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    max-height: 100px;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+  }
+}
+
+@keyframes close-animation {
+  66% {
+    opacity: 0;
+    max-height: 100px;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+    margin-bottom: 10px;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 .notifications {
   z-index: 10;
   position: fixed;
@@ -21,23 +51,14 @@
   border-radius: 5px;
   align-items: center;
   gap: 0.3em;
-  max-height: 0;
-  transition: max-height 0.15s linear;
+  max-height: 100px;
   overflow: hidden;
   margin-bottom: 10px;
-}
-
-.notification_state_open {
-  max-height: 100px;
+  animation: open-animation 0.15s forwards linear;
 }
 
 .notification_state_close {
-  max-height: 0;
-  padding: 0;
-  margin-bottom: 0;
-  opacity: 0;
-  transition: opacity 0.3s linear, padding 0.15s linear 0.3s,
-    max-height 0.15s linear 0.3s, margin-bottom 0.15s linear 0.3s;
+  animation: close-animation forwards linear 0.45s;
 }
 
 .notification_type_error {
