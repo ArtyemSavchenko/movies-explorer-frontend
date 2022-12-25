@@ -8,6 +8,3 @@ SPA для работы с открытым API, который возвраща
 * реализована валидация форм через `кастомный хук`,
 * роутинг реализован с помощью `React Router 6` и `createBrowserRouter`,
 * семантическая верстка.
-
-Ссылка на SPA: <a href="https://movie.nomoredomains.icu/" target="_blank">`https://movie.nomoredomains.icu/`</a>
-(сервер оплачен до февраля 2023 года)
